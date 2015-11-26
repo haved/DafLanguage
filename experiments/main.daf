@@ -1,0 +1,33 @@
+#import "base.daf"
+
+struct Screen {}
+
+impl Screen {
+	def flipBuffer:=(){}
+}
+
+struct Entity {
+	
+}
+
+struct MyGame {
+	myEntity:Entity*,
+	screen:Screen*,
+}
+
+impl MyGame {
+	def new:=(entity:Entity*) {
+		let game:MyGame=
+
+	def doLoop:=(self:&MyGame) {
+		self.myEntity->update();
+		self.myEntity->render();
+		self.screen->flipBuffer();
+}
+
+def main:=() {
+	let game:=MyGame::new();
+	while (true) {
+		game.doLoop();
+	}
+}

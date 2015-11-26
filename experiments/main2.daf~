@@ -1,0 +1,24 @@
+#import "base.daf"
+
+def int N = 4;
+def IMPLICIT = 14;
+
+struct Color {
+	int red;
+	int green;
+	int blue;
+}
+
+impl Color {
+	def new = (int red, int green, int blue) -> Color {
+		Color c;
+		c.red = red;
+		c.blue = blue;
+		c.green = green;
+		c
+	}
+
+	def /*fn*/ brighter = (&self) -> Color {
+		Color::new(self->red*1.1f, self->blue*1.1f, self->green*1.1f)		
+	}
+}
