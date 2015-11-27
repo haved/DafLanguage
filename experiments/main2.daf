@@ -1,4 +1,4 @@
-#import "base.daf"
+#import "window.daf"
 
 def int N = 4;
 def IMPLICIT = 14;
@@ -21,4 +21,37 @@ impl Color {
 	def /*fn*/ brighter = (&self) -> Color {
 		Color::new(self->red*1.1f, self->blue*1.1f, self->green*1.1f)	
 	}
+}
+
+class Entity {
+	pub int x;
+	pub int y;
+	pub int width;
+	pub int height;
+
+	pub Entity = (&self, int x, int y, int width, int height) {
+		self.x      = x;
+		self.y      = y;
+		self.width  = wdith;
+		self.height = height;
+	}
+
+	pub virtual update = (&self) {}
+	pub virtual render = (&self) {}
+}
+
+impl Entity {
+	def Constructor = (&self) -> *Entity {
+		
+		&self;
+	}
+}
+
+class BallEntity extends Entity {
+	Color color;
+	pub BallEntity = (&self, int x, int y, int width, int height, Color color) : Entity(self, x, y, width, height){
+		self.color = color;
+	}
+	
+	
 }

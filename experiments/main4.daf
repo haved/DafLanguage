@@ -1,0 +1,117 @@
+#import "math.daf"
+
+def TEXT:="halla";
+def NUMBER:=5;
+def BYTE:u8=4;
+
+def WIDTH:=1600;
+def HEIGHT:=900;
+def RADIUS:=50;
+
+def main:=(argc:string[]) {
+	let ball:BallEntity(WIDTH/2-RADIUS, HEIGHT/2-RADIUS);
+	let world:World(WIDTH, HEIGHT, &ball);
+	
+	def SET_DELTA:=1/60f;
+	let mut elapsedTime := 0;
+	while(!shouldClose()) {
+		world.updateTime(SET_DELTA, elapsedTime);
+		world.doLoop();
+		elapsedTime+=SET_DELTA;
+	}
+}
+
+def shouldClose:=()->boolean {
+	return false;
+}
+
+class World {
+	width:int;
+	height:int;
+	elapsedTime:float;
+	deltaTime:float;
+
+	myFavoriteEntity:Entity*;
+	
+	def World:=(&self, width:int, width:int, entity:Entity*) {
+		self.myFavouriteEntity = entity;
+		self.width = width;
+		self.height = height;
+	}
+
+	def doLoop(&self) {
+		self.myFavoriteEntity.update();
+		//self.canvas->Clean();
+		self.myFavouriteEntiy.render();
+		//self.canvas.SwapBuffers();
+	}
+
+	def updateTime(&self, delta:float, elapsed:float) {
+		self.deltaTime = delta;
+		self.elapsedTime = elapsed;
+	}
+}
+
+interface UpdateRender {
+	Update:(&self, world:World*);
+	Render:(&self, world:World*);
+}
+
+abstract class Entity implements UpdateRender {
+	x:int;
+	y:int;
+	width:int;
+	height:int;
+	
+	//Constructor
+	def Entity:=(&self, x:int, y:int, width:int, height:int) {
+		self.x = x;
+		self.y = y;
+		self.width = width;
+		self.height = height;
+	}
+
+	def impl Update:=(&self, world:World*) {
+		self.MakeInBounds(world);
+	}
+
+	def MakeInBounds:=(&self, world:World*) {
+		self.x = Math::max( 0, Math::min( world->width,  self.x+self.width  ) )
+		self.y = Math::max( 0, Math::min( world->height, self.y+self.height ) )
+	}
+}
+
+class Color {
+	red:int;
+	green:int;
+	blue:int;
+	
+	//The constructor
+	def Color:=(&self, red:int, green:int, blue:int) {
+		self.red   = red;
+		self.green = green;
+		self.blue  = blue;
+	}
+}
+
+class BallEntity extends Entity {
+	color:Color;
+
+	def BallEntity:=(&self, color:Color, x:int, y:int, diameter:int) {
+		/*Call parent constructor*/
+		Entity::Entity(self, x, y, dieameter, diameter);
+		self.color = color;
+	}
+	
+	def impl Update:=(&self, world:World*) {
+		self.x+=cast(int) sin(world->elapsedTime)*world->deltaTime;
+		base.update(world);
+	}
+
+	def impl Render:=(&self, world:World*) {
+		/*Imaginary render code
+		c := world->GetCanvas()
+		c->draw
+		*/
+	}
+}
