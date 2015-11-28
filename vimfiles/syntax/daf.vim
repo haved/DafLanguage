@@ -8,12 +8,11 @@ if exists("b:current_syntax")
 endif
 
 syn keyword dafControlAndDefKeywords let mut def if else for while do match cast return break continue
-syn keyword dafDefinitionKeywords struct class abstract extends interface implements impl self
+syn keyword dafDefinitionKeywords struct class abstract extends interface implements impl self inscope
 syn keyword dafPrimitiveTypeKeywords int long float double boolean char u8 u16 s16 u32 s32 u64 s64 true false
-syn match dafNumber '\d\+'
-syn match dafNumber '\d\+f'
-syn match dafNumber '[-+]\d\+'
-syn match dafNumber '[-+]\d\+f'
+syn match dafNumber '\<\d\+\>'
+syn match dafNumber '\<\d\+\.\d*f\?'
+syn match dafNumber '\.\d\+f\?'
 syn match dafString '".*"'
 
 syn region dafBlock start="{" end="}" fold transparent
