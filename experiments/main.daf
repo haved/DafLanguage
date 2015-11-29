@@ -127,18 +127,39 @@ class BallEntity extends Entity {
 }
 
 #import "AudioPlayer.daf"
+#import "Time.daf"
 
-def playSine:=(freq:int) {
+def VOLUME:=10000
+def DEFAULT_FREQ = 440
+def SAMPLE_RATE 44100;
+
+def PlaySine:=(freq:int) {
+	let mut freqCounter:=0;
+	
 	let desiredSpec:AudioSpec;
-	desiredSpec.freq = 44100;
+	desiredSpec.freq = SAMPLE_RATE;
 	desiredSpec.format = AudioSpec::AUDIO_S16SYS;
 	desiredSpec.channels = 1;
 	desiredSpec.samples = 512;
 	desiredSpec.callback = (streamIn:u8[]) inscope {
 		let stream:=cast(s16[]) streamIn;
-		let len=strem.len();
-		for (let i:=0; i < len; i++) {
-		
+		let len=stream.len();
+		for (let mut i:=0; i < len; i++) {
+			freqCounter += freq;
+			stream[i]=cast(s16)VOLUME*sin(freqCounter * TAU/SAMPLE_RATE)
 		}
 	}
+	AudioPlayer::OpenAudio(&desiredSpec);
+	AudioPlayer::PauseAudio(0);
+	Time::Delay(3000);
+	freq = freq/2;
+	Time::Delay(3000)
+	AudioPlayer::PauseAudio(1);
+	Time::Delay(500);
+	AudioPlayer::PauseAudio(0);
+	freq = 4*freq;
+	Time::Delay(2000);
+	freq = freq/2;
+	Time::Delay(3000);
+	AudioPlayer::CloseAudio();
 }
