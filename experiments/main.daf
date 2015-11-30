@@ -19,29 +19,61 @@ def HEIGHT:=900;
 def RADIUS:=50;
 
 def main:=(argc:string[]) {
-	let ball:BallEntity(WIDTH/2-RADIUS, HEIGHT/2-RADIUS);
+	let ball:BallEntity(Color(), WIDTH/2-RADIUS, HEIGHT/2-RADIUS, RADIUS); //Note how Color() is in that scope
 	let world:World(WIDTH, HEIGHT, &ball);
 	
 	def SET_DELTA:=1/60f;
 	let mut elapsedTime := 0;
+	
 	while(!shouldClose()) {
 		world.updateTime(SET_DELTA, elapsedTime);
 		world.doLoop();
 		elapsedTime+=SET_DELTA;
 	}
+
+	let ole:&Entity = new BallEntity();
+	world.entity = ole;
+	world.doLoop();
+	delete ole;
+
+	let number:=10;
+	let n_ptr:=&number; //n_ptr is actually a reference to number.
+	let mut mutNumber:=12;
+	mutNumber++;
+	let mut m_ptr:=&mutNumbr;
+	//*m_ptr += 1; //Nope. m_ptr is not a &mut reference
+	let mut kopi:=*m_ptr;
+	//m_ptr:=&mut mutNumber; // m_ptr is a &mut s32, not &s32 
+	let mut sos_ptr:&s32=&number;
+	//*my_ptr += 1; Does not work. my_ptr is not a mut reference
+	let mut final_ptr:=&mut mutNumber;
+	*final_ptr+=4;
+	final_ptr=&mut kopi;
+	*final_ptr-=kopi;
+	my_ptr = final_ptr //A muatble reference can turn into an immutable one, but not the other way around.
+
+	let mut per:&Entity = new BallEntity(Color(255,0,255), 400, 500, 50);
+	per.update(world); //This is possible even though the pointer isn't mutable!
+	delete per;
+	
+	let paal:SmallEntity(50, 40, 100, 300);
+	let leif:SmallEntity(600, 20, 54, 33);
+	//paal = leif; //Nope. paal ain't mutable
+	paal.update(&world); //Possbile
+	
 }
 
 def shouldClose:=()->boolean {
 	return false;
 }
 
-class World {
+pub class World {
 	width:int;
 	height:int;
 	elapsedTime:float;
 	deltaTime:float;
 
-	myFavoriteEntity:Entity*;
+	myFavoriteEntity:&Entity;
 	
 	def World:=(&self, width:int, width:int, entity:Entity*) {
 		self.myFavouriteEntity = entity;
@@ -50,9 +82,9 @@ class World {
 	}
 
 	def doLoop(&self) {
-		self.myFavoriteEntity.update();
+		self.myFavoriteEntity.update(&world);
 		//self.canvas->Clean();
-		self.myFavouriteEntiy.render();
+		self.myFavouriteEntiy.render(&world);
 		//self.canvas.SwapBuffers();
 	}
 
@@ -62,12 +94,12 @@ class World {
 	}
 }
 
-interface UpdateRender {
-	Update:(&self, world:World*);
-	Render:(&self, world:World*);
+pub interface UpdateRender {
+	Update:(&self, world:&World); //It's not pretty, but it's really not the same as &world:World 
+	Render:(&self, world:&World);
 }
 
-abstract class Entity implements UpdateRender {
+pub abstract class Entity implements UpdateRender {
 	x:int;
 	y:int;
 	width:int;
@@ -81,23 +113,23 @@ abstract class Entity implements UpdateRender {
 		self.height = height;
 	}
 
-	def impl Update:=(&self, world:World*) {
+	def impl Update:=(&self, world:&World) {
 		self.MakeInBounds(world);
 	}
 
-	def MakeInBounds:=(&self, world:World*) {
+	def MakeInBounds:=(&self, world:&World) {
 		self.x = Math::max( 0, Math::min( world->width,  self.x+self.width  ) )
 		self.y = Math::max( 0, Math::min( world->height, self.y+self.height ) )
 	}
 }
 
-class Color {
-	red:int;
-	green:int;
-	blue:int;
+pub class Color {
+	red:u8;
+	green:u8;
+	blue:u8;
 	
 	//The constructor
-	def Color:=(&self, red:int, green:int, blue:int) {
+	def Color:=(&self, red:u8, green:u8, blue:u8) {
 		self.red   = red;
 		self.green = green;
 		self.blue  = blue;
@@ -109,16 +141,16 @@ class BallEntity extends Entity {
 
 	def BallEntity:=(&self, color:Color, x:int, y:int, diameter:int) {
 		/*Call parent constructor*/
-		Entity::Entity(self, x, y, dieameter, diameter);
+		Entity::Entity(self, x, y, diameter, diameter);
 		self.color = color;
 	}
 	
-	def impl Update:=(&self, world:World*) {
+	def impl Update:=(&self, world:&World) {
 		self.x+=cast(int) sin(world->elapsedTime)*world->deltaTime;
 		base.update(world);
 	}
 
-	def impl Render:=(&self, world:World*) {
+	def impl Render:=(&self, world:&World) {
 		/*Imaginary render code
 		c := world->GetCanvas()
 		c->draw
@@ -133,7 +165,7 @@ def VOLUME:=10000
 def DEFAULT_FREQ = 440
 def SAMPLE_RATE 44100;
 
-def PlaySine:=(freq:int) {
+pub def PlaySine:=(freq:int) {
 	let mut freqCounter:=0;
 	
 	let desiredSpec:AudioSpec;
