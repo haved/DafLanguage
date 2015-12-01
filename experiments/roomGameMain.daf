@@ -1,0 +1,6 @@
+#import "referenceTest.daf"
+
+def main:=() -> int {
+	doTests();
+	return 0;
+}

@@ -1,0 +1,29 @@
+pub def doTests:=() {
+	println("Hello World!");
+	let mut x:=5;
+	printX(x);
+	foo(x);
+	printX(x);
+	bar(&mut x);
+	printX(x);
+	readonly_bar(&x);
+	readonly_bar(&mut x);
+}
+
+def foo:=(&mut x:int) {
+	x++;
+	println("foo(&mut x:int){x++;}");
+}
+
+def bar:=(x_ref:&mut int) {
+	*x_ref += 4;
+	println("bar(x_ref:&mut int){*x_ref+=4}");
+}
+
+def printX(&x:int) {
+	println("x = {}", x);
+}
+
+def readonly_bar(x:&int) {
+	println("readonly_bar (x:&int) can take both mutable and immutable ref's");
+}
