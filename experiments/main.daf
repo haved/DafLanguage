@@ -161,9 +161,9 @@ class BallEntity extends Entity {
 #import "AudioPlayer.daf"
 #import "Time.daf"
 
-def VOLUME:=10000
-def DEFAULT_FREQ = 440
-def SAMPLE_RATE 44100;
+def VOLUME:=10000;
+def DEFAULT_FREQ:=440;
+def SAMPLE_RATE:=44100;
 
 pub def PlaySine:=(freq:int) {
 	let mut freqCounter:=0;

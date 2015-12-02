@@ -1,6 +1,16 @@
 #import "referenceTest.daf"
 
+def ROOM_COUNT:=20;
+
 def main:=() -> int {
 	doTests();
+	
+	let rooms_immut:=&mut Entity[ROOM_COUNT]; //You can't make a pointer to an array when you initialize it, so this means an array of &mut Entity.
+	//We encounter problems when we want to define an array of Entity pointers
+	let mut rooms:&mut Entity[]; //For the time being we say this is an array of Entity pointers
+	rooms = rooms_immut;
+	
+	
+
 	return 0;
 }
