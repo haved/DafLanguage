@@ -1,0 +1,47 @@
+
+
+def main:=() -> int {
+	syntaxStuff();
+	let mut x:=5;
+	takesPointer(&x);
+	takesAndMutPointer(&mut x);
+	takesRefToInt(x);
+	takesMutRefToInt(x); //Maybe wanna disclose that the function can change x?
+
+	let mut ptr_array:=&mut int[];
+}
+
+def syntaxStuff:=() {
+	let mut i:=5;
+	let mut j:=10;
+	let pegged:=6;
+	let pegged_ptr:=&pegged; //Can't be &mut
+	let i_ptr:=&i;
+	let i_ptr_mut:=&mut i;
+	let mut my_ptr:&int;
+	*i_ptr_mut+=1;
+	*i_ptr = pegged;
+	my_ptr = &pegged;
+	my_ptr[0]++; //Same as *my_ptr++
+	//my_ptr[1]++;//Will fail or something. Some mem_safety is wanted.
+}
+
+#import "print.daf"
+
+def takesPointer:=(ptr:&int) {
+	printf("takes Pointer {}", *ptr);
+}
+
+def takesAndMutPointer:=(ptr:&mut int) {
+	ptr[0]++;
+	printf("takes mut pointer and changes it to {}", ptr[0]);
+}
+
+def takeRefToInt:=(&x:int) {
+	printf("takes ref to int of value {}", x);
+}
+
+def takeMutRefToInt:=(&mut x:int) {
+	x++;
+	printf("takes ref to mut int and changes it to {}", x);
+}
