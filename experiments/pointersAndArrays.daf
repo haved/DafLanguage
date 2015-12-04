@@ -1,0 +1,32 @@
+#import "print.daf"
+#import "assert.daf"
+
+def main:=(args:string[]) {
+	let mut i:=5;
+	let i_ptr:=&mut i;
+	let mut any_ptr:&mut int;
+	let mut my_array:int[10];
+	let mut pointer:&mut int;
+	pointer = &mut i;
+	any_ptr = pointer;
+	pointer = my_array;
+
+	functionTakingConstPointer(any_ptr, mut my_array);
+
+	assert(any_ptr==my_array);
+}
+
+def functionTakingConstPointer(x:&int, &mut y:&int) {
+	printf("X is {}, The length is {}", x[0], x.len);
+	printf("Y is {}, the length is {}", *y, y.len); //y[0] is equivelant to *y;
+	//We can change y to something else, but we can't dereference y and change that.
+	y=x;
+}
+
+def functionTakingIdenticalParameters(x:int[], &mut y:int[]) {
+	functionTakingConstPointer(x, mut y);
+}
+
+def functionTakingPointersToMut(x:int[], y:int[mut], z:int[][mut], w:int[mut][]) { //Not too sure about this syntax
+	
+}
