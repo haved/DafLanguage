@@ -7,6 +7,7 @@ def main:=(args:string[]) {
 	let mut any_ptr:&mut int;
 	let mut my_array:int[10];
 	let mut pointer:&mut int;
+	let mut a_pointer:int[mut];
 	pointer = &mut i;
 	any_ptr = pointer;
 	pointer = my_array;
@@ -28,5 +29,10 @@ def functionTakingIdenticalParameters(x:int[], &mut y:int[]) {
 }
 
 def functionTakingPointersToMut(x:int[], y:int[mut], z:int[][mut], w:int[mut][]) { //Not too sure about this syntax
-	
+	w[0]=x;
+	w[1]=y;
+	w[2]=z; //Only if you really want to. Putting a two dimensinal array in a one dimensional array
+	//w[0][0]=x[0]; First of all, this is already true. Secondly it's not legal because w is int[mut]['not mut']
+	let mut super_array:=&mut w; //This is an int[mut][mut][];
+	let mut hyper_array:int[][mut][mut][]=&super_array;
 }
