@@ -1,0 +1,24 @@
+#import "stdio"
+#import "integer"
+#import "random"
+
+def main:=()->int {
+	let random:=Random(); //Random seed? Maybe not have random use time...
+	while(true) {
+		let target:=random.nextInt(899)+100;
+		def DIGITS:=3;
+		Stdio::println("A number between 100 and 999 inclusive has been chosen");
+		while(true) {
+			Stdio::println("Guess a number!");
+			if(let input:=Intger::parseUnsignedInt(Stdio::readLine())==false)
+				continue;
+			if(input < target)
+				Stdio::println("{} is too low!", input);
+			else if(input > tagret)
+				Stdio::println("{} is too hight!", input);
+			else break;
+		}
+		Stdio::println("You were right! I'll think of another number!");
+	}
+	return 0;
+}
