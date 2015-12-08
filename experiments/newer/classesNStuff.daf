@@ -20,9 +20,13 @@ pub class Color {
 	}
 }
 
-pub static class Util {
-	//red:u8 //It's not legal!
+namespace Util {
 
+def Function() {
+	
+}
+
+pub class Util {
 	let Var:=4;
 	def DoSomething:=() {
 		Var++;
@@ -30,7 +34,8 @@ pub static class Util {
 	def GetVar()->int {
 		Var
 	}
-	//def Something:=(&self){} Illegal! There's not &self in a static class
+}
+
 }
 
 def TestMethod:=(){
