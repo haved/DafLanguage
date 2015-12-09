@@ -7,10 +7,11 @@ if exists("b:current_syntax")
 	finish
 endif
 
-syn keyword dafControlAndDefKeywords let mut def pub if else for while do match cast return break continue
+syn keyword dafControlAndDefKeywords let mut def pub if else for in while do match cast return break continue retry
 syn keyword dafHeapStuff new delete
 syn keyword dafDefinitionKeywords struct class abstract extends interface implements impl self inscope
-syn keyword dafPrimitiveTypeKeywords int long float double boolean char u8 u16 s16 u32 s32 u64 s64 true false
+syn keyword dafPrimitiveTypeKeywords int long float double boolean char u8 u16 s16 u32 s32 u64 s64 usize true false
+syn match dafIterator '=\.\.[<=>]'
 syn match dafNumber '\<\d\+\>'
 syn match dafNumber '\<\d\+\.\d*f\?'
 syn match dafNumber '\.\d\+f\?'
@@ -27,12 +28,11 @@ let b:current_syntax = "daf"
 
 hi def link dafControlAndDefKeywords		Statement
 hi def link dafDefinitionKeywords		PreProc
-hi def link dafControlStatementKeywords		Todo
 hi def link dafPrimitiveTypeKeywords         	Type
 hi def link dafHeapStuff         		Type
+hi def link dafIterator				Type
 hi def link dafString      			Constant
 hi def link dafPreProc     			PreProc
 hi def link dafNumber      			Constant
 hi def link dafTodo        			Todo
-hi def link dafComment				Comment     		
-hi def link dafControlStatementKeywords		Todo
+hi def link dafComment				Comment	

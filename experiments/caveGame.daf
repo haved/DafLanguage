@@ -1,78 +1,127 @@
-#import "stdio"
-#import "random"
-#import "time"
-
-//using namespace Stdio;
-//using namespace Random;
+#import <stdio>
+#import <random>
+#import <time>
 
 class Entity {
 	smell:int;
-	name:char[]; //Notice how it isn't mutable! It's a 'const char*'  !
-
-	def Entity:=(self, smell:int, &name:char[]) {
-		self.smell = smell;
-		self.name = name;
-	}
+	name:char[];
+	points:int;
 }
 
 class Room {
 	smell:int;
-	shortcutTo:int;
-	entity:&mut Entity;
-	
-	def Room:=(self){ //Self is an &mut Room
-		self.smell = 0;
-		self.entity = NULL;
-	}
+	entity:&Entity;
+	shortcut:int;
 }
 
-def ROOMS:=100;
-def APROX_SHORTCUTS:=7;
-def NUM_ENTITIES = 10;
-def BASE_SMELL:=4;
-def EXTRA_SMELL:=4;
-def GOAL_SMELL:=9;
+def ROOM_COUNT:=100;
+def APPROX_SHORTCUT_COUNT:=6;
 
-def NORMAL_NAMES:=char[][]{"Ball", "Poo", "Tardis", "Hunk of Junk", "Stain", "Lump of coal"};
-def GOAL_NAME:="The best wumpus is the world!";
+def BASE_ENTITY_COUNT:=6;
+def EXTRA_ENTITY_COUNT:=3;
+def BASE_ENTITY_SMELL:=4;
+def EXTRA_ENTITY_SMELL:=4;
+def GOAL_ENTITY_SMELL:=10;
+def ENTITY_NAMES:=char[][]{"Ball", "Bird", "Lump of Coal", "Trump", "Goat", "Santa", "Breadstick"};
+def GOAL_ENTITY_NAME:="Chest";
+def BASE_ENTITY_ANTIPOINTS:=5;
+def EXTRA_ENTITY_ANTIPOINTS:=4;
+def GOAL_ENTITY_POINTS:=20;
 
-def main:=()->int {
-	Random::seed(Time::now());
-	let mut rooms:Room[ROOMS];
-	for(let i:= 0; i<rooms.length; i++){
-		Room::Room(&mut rooms[i]); //A pointer to room 'i'
-		rooms[i].shortcutTo = Random::nextInt(ROOMS)<APROX_SHORTCUTS ? Random::nextInt(ROOMS) : -1;
-	}
-
-	let mut entities:Entity[NUM_ENTITIES];
-	for(let i:=0; i < NUM_ENTITIES; i++) {
-		Entity::Entity(&mut entities[i], i==0?GOAL_SMELL:BASE_SMELL+Random::nextInt(EXTRA_SMELL), i==0?GOAL_NAME:NORMAL_NAMES[Random::nextInt(NORMAL_NAMES.length)]); 
+def main:=() -> int{
+	stdio::printf("Making cave with "ROOM_COUNT" rooms!\n");
+	random::seed(time::systemTimeMillis());
+	let mut rooms:Room[ROOM_COUNT];
+	for i in 0=..<ROOM_COUNT {
+		rooms[i].smell=0;
+		rooms[i].entity=NULL;
+		if(random::nextInt(ROOMS)<APPROX_SHORTCUT_COUNT) {
+			rooms[i].shortcut=0; //Temporairly
+			let mut target:=-1;
+			while(target==-1) {
+				let guess:=random::nextInt(ROOM_COUNT);
+				if(rooms[guess].shortcut==-1)
+					target=guess;
+			}
+			rooms[   i  ].shortcut = target;
+			rooms[target].shortcut = i;
+		} else
+			rooms[i].shortcut=-1;
 	}
 	
-	def spreadSmellDown:=(index:int, smell:int) inscope
-		if(index>=0 && smell > 0)
-			if(rooms[index].smell < smell) {
-				rooms[index].smell = smell;
-				spreadSmellDown(index-1, smell-1);
-			}
-			
-	
-	def spreadSmellUp:=(index:int, smell:int) inscope
-		if(index<ROOMS && smell > 0)
-			if(rooms[index].smell < smell) {
-				rooms[index].smell = smell;
-				spreadSmellUp(index+1, smell-1);
-			}
+	let entityCount:=random::baseNextInt(BASE_ENTITY_COUNT, EXTRA_ENTITY_COUNT);
+	stdio::printf("Adding {} smelly items. You are looking for a smelly {} with a smell level of {}\n", entityCount, GOAL_ENTITY_NAME, GOAL_ENTITY_SMELL);	
 
-	for(let i:=0; i < NUM_ENTITIES; i++) {
-		let room:=Random::nextInt(ROOMS);
-		if(rooms[room].entity!=NULL)
-			retry; //Only in for loops. Will skip "i++"
-		rooms[room].entity=&mut entities[i];
-		rooms[room].smell = entities[i].smell;
-		spreadSmellDown(room-1, smell-1);
-		spreadSmellUp(room+1, smell-1);
+	let mut entities:=new Entity[entityCount];
+	entities[0].smell=GOAL_ENTITY_SMELL;
+	entities[0].name=GOAL_ENTITY_NAME;
+	entities[0].points=GOAL_ENTITY_POINTS;
+	for i in 1=..<entities.length {
+		entities[i].smell = random::baseNextInt(BASE_ENTITY_SMELL, EXTRA_ENTITY_SMELL);
+		entities[i].name  = ENTITY_NAMES[random::nextInt()];
+		entities[i].points= -random::baseNextInt(BASE_ENTITY_ANTIPOINTS, EXTRA_ENTITY_ANTIPOINTS);
+	}
+	
+	def updateSmellInRooms:=(room:int, smell:int) {
+		if(rooms[room].smell>=smell)
+			return;
+		rooms[room].smell = smell;
+		if(room>1)
+			updateSmellInRoom(room-1, smell-1);
+		if(room<ROOM_COUNT-1)
+			updateSmellInRoom(room+1, smell-1);
+		if(rooms[room].shortcut!=-1)
+			updateSmellInRoom(rooms[room].shortcut, smell-1);
 	}
 
-	//The world is now in theory finished!
+	for i in 0=..<entityCount {
+		let roomChoice:=random::nextInt(ROOM_COUNT);
+		if(rooms[roomCoice].entity!=NULL)
+			retry;
+		rooms[roomChoice].entity = &entities[i];
+		updateSmellInRooms(roomChoice, entities[i].smell);
+	}
+
+	//The world is set up!
+	
+	stdio::printf("\n\n=== Welcome to cave game in daf! ===\n\n");
+
+	let mut playerPos:= ROOM_COUNT/2;
+	let mut stuff:=0;
+	let mut points:=0;
+	let mut moves:=0;
+	while(true) {
+		let room:=&mut rooms[playerPos];
+		stdio::printf("\nYou are in room {}.\nIt has a smell level of {}.\n", playerPos, room.smell);
+		if(room.entity!=NULL) {
+			stdio::printf("You found a smelly {}. You picked it up but the room still smells.\n", room.entity.name);
+			points+=room.entity.points;
+			stuff++;
+			if(room.entity.points==GOAL_ENTITY_POINTS)
+				break;
+			room.entity = NULL;
+		}
+		if(room.shortcut!=-1) {
+			stdio::printf("There is an opening to room {} here.\n", room.shortcut);
+		
+		stdio::printf("Enter room: ");
+		while(true) {
+			let mut newPos:int=-1; 
+			stdio::readInt(&mut newPos);
+			if(newPos<0 | newPos>=ROOM_COUNT) {
+				stdio::prinft("The room has to be a number between 0 and {} exclusive!");
+				continue;
+			}
+			if(newPos==playerPos) {
+				stdio::printf("You are already in that room!");
+				continue;
+			}
+			playerPos=newPos;
+			break;
+		}
+	}
+
+	stdio::printf("You won! You found {} stuff, got {} points and moved {} times.\n", stuff, points, moves);
+
+	delete entities;
 }

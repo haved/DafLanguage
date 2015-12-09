@@ -1,0 +1,78 @@
+#import "stdio"
+#import "random"
+#import "time"
+
+//using namespace Stdio;
+//using namespace Random;
+
+class Entity {
+	smell:int;
+	name:char[]; //Notice how it isn't mutable! It's a 'const char*'  !
+
+	def Entity:=(self, smell:int, &name:char[]) {
+		self.smell = smell;
+		self.name = name;
+	}
+}
+
+class Room {
+	smell:int;
+	shortcutTo:int;
+	entity:&mut Entity;
+	
+	def Room:=(self){ //Self is an &mut Room
+		self.smell = 0;
+		self.entity = NULL;
+	}
+}
+
+def ROOMS:=100;
+def APROX_SHORTCUTS:=7;
+def NUM_ENTITIES = 10;
+def BASE_SMELL:=4;
+def EXTRA_SMELL:=4;
+def GOAL_SMELL:=9;
+
+def NORMAL_NAMES:=char[][]{"Ball", "Poo", "Tardis", "Hunk of Junk", "Stain", "Lump of coal"};
+def GOAL_NAME:="The best wumpus is the world!";
+
+def main:=()->int {
+	Random::seed(Time::now());
+	let mut rooms:Room[ROOMS];
+	for(let i:= 0; i<rooms.length; i++){
+		Room::Room(&mut rooms[i]); //A pointer to room 'i'
+		rooms[i].shortcutTo = Random::nextInt(ROOMS)<APROX_SHORTCUTS ? Random::nextInt(ROOMS) : -1;
+	}
+
+	let mut entities:Entity[NUM_ENTITIES];
+	for(let i:=0; i < NUM_ENTITIES; i++) {
+		Entity::Entity(&mut entities[i], i==0?GOAL_SMELL:BASE_SMELL+Random::nextInt(EXTRA_SMELL), i==0?GOAL_NAME:NORMAL_NAMES[Random::nextInt(NORMAL_NAMES.length)]); 
+	}
+	
+	def spreadSmellDown:=(index:int, smell:int) inscope
+		if(index>=0 && smell > 0)
+			if(rooms[index].smell < smell) {
+				rooms[index].smell = smell;
+				spreadSmellDown(index-1, smell-1);
+			}
+			
+	
+	def spreadSmellUp:=(index:int, smell:int) inscope
+		if(index<ROOMS && smell > 0)
+			if(rooms[index].smell < smell) {
+				rooms[index].smell = smell;
+				spreadSmellUp(index+1, smell-1);
+			}
+
+	for(let i:=0; i < NUM_ENTITIES; i++) {
+		let room:=Random::nextInt(ROOMS);
+		if(rooms[room].entity!=NULL)
+			retry; //Only in for loops. Will skip "i++"
+		rooms[room].entity=&mut entities[i];
+		rooms[room].smell = entities[i].smell;
+		spreadSmellDown(room-1, smell-1);
+		spreadSmellUp(room+1, smell-1);
+	}
+
+	//The world is now in theory finished!
+}
