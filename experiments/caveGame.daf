@@ -14,6 +14,18 @@ class Room {
 	shortcut:int;
 }
 
+class EntityArrayContainer implements destructable
+{
+	array:Entity[];
+	def EntityArrayContainer(self, array:Entity[]) {
+		self.array = array;
+	}	
+
+	def ~EntityArrayContainer() {
+		delete[] array;
+	}
+}
+
 def ROOM_COUNT:=100;
 def APPROX_SHORTCUT_COUNT:=6;
 
@@ -53,6 +65,7 @@ def main:=() -> int{
 	stdio::printf("Adding {} smelly items. You are looking for a smelly {} with a smell level of {}\n", entityCount, GOAL_ENTITY_NAME, GOAL_ENTITY_SMELL);	
 
 	let mut entities:=new Entity[entityCount];
+	let mut entitiesContainer:EntityArrayContainer(entities);
 	entities[0].smell=GOAL_ENTITY_SMELL;
 	entities[0].name=GOAL_ENTITY_NAME;
 	entities[0].points=GOAL_ENTITY_POINTS;
@@ -123,5 +136,5 @@ def main:=() -> int{
 
 	stdio::printf("You won! You found {} stuff, got {} points and moved {} times.\n", stuff, points, moves);
 
-	delete entities;
+	//Entities are automaticly deleted here!
 }
