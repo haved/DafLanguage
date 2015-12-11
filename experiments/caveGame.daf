@@ -41,9 +41,10 @@ def EXTRA_ENTITY_ANTIPOINTS:=4;
 def GOAL_ENTITY_POINTS:=20;
 
 def main:=() -> int{
-	stdio::printf("Making cave with "ROOM_COUNT" rooms!\n");
+	stdio::printf("Making cave with "+ROOM_COUNT+" rooms!\n");
 	random::seed(time::systemTimeMillis());
 	let mut rooms:Room[ROOM_COUNT];
+        
 	for i in 0=..<ROOM_COUNT {
 		rooms[i].smell=0;
 		rooms[i].entity=NULL;
@@ -62,7 +63,7 @@ def main:=() -> int{
 	}
 	
 	let entityCount:=random::baseNextInt(BASE_ENTITY_COUNT, EXTRA_ENTITY_COUNT);
-	stdio::printf("Adding {} smelly items. You are looking for a smelly {} with a smell level of {}\n", entityCount, GOAL_ENTITY_NAME, GOAL_ENTITY_SMELL);	
+	stdio::printf("Adding {} smelly items. You are looking for a smelly "+GOAL_ENTITY_NAME+" with a smell level of "+GOAL_ENTITY_SMELL+"\n", entityCount);	
 
 	let mut entities:=new Entity[entityCount];
 	let mut entitiesContainer:EntityArrayContainer(entities);
