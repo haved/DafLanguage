@@ -44,12 +44,15 @@ def main:=() -> int{
 	stdio::printf("Making cave with "+ROOM_COUNT+" rooms!\n");
 	random::seed(time::systemTimeMillis());
 	let mut rooms:Room[ROOM_COUNT];
-        
+ 
+	for i in 0=..<ROOM_COUNT {
+		rooms[i].shortcut=-1;
+	}
+
 	for i in 0=..<ROOM_COUNT {
 		rooms[i].smell=0;
 		rooms[i].entity=NULL;
 		if(random::nextInt(ROOMS)<APPROX_SHORTCUT_COUNT) {
-			rooms[i].shortcut=0; //Temporairly
 			let mut target:=-1;
 			while(target==-1) {
 				let guess:=random::nextInt(ROOM_COUNT);
