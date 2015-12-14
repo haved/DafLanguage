@@ -9,7 +9,7 @@ endif
 
 syn keyword dafControlAndDefKeywords let mut def pub if else for in while do match cast return break continue retry
 syn keyword dafHeapStuff new delete destructable
-syn keyword dafDefinitionKeywords struct class abstract extends interface implements impl self inscope
+syn keyword dafDefinitionKeywords using namespace struct class abstract extends interface implements impl self inscope
 syn keyword dafPrimitiveTypeKeywords int long float double boolean char u8 u16 s16 u32 s32 u64 s64 usize true false
 syn match dafIterator '=\.\.[<=>]'
 syn match dafNumber '\<\d\+\>'

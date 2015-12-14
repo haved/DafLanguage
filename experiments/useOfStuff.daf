@@ -1,0 +1,19 @@
+#import <stdio>
+
+using namespace stdio;
+
+def main:=()->int{
+	print("Hurray!");//stdio:: is not needed
+	geam::stuff(); //A namespace
+}
+
+namespace gaem {
+	def stuff:=(){
+		print("Hello");
+	}
+
+	def stuffTwice:=(){
+		stuff();//Same namespace (geam)
+		stuff();
+	}
+}
