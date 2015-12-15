@@ -1,3 +1,4 @@
 *.swp
 *~
 vimfiles/moveFromVimFiles.sh
+*.class
