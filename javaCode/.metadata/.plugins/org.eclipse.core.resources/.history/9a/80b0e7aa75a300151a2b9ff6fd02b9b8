@@ -1,0 +1,8 @@
+package me.haved.engine.core;
+
+public class FPSCounter {
+	
+	public void nextFrame(float deltaTime) {
+		
+	}
+}

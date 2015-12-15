@@ -1,0 +1,15 @@
+package me.haved.engine.core;
+
+public class FPSCounter {
+	private int frameCount;
+	private long startTimeMillis=0; 
+	public void nextFrame() {
+		if(startTimeMillis==0)
+			startTimeMillis = System.currentTimeMillis();
+		frameCount++;
+		long diff = System.currentTimeMillis() - startTimeMillis;
+		if(diff>=1000) {
+			
+		}
+	}
+}

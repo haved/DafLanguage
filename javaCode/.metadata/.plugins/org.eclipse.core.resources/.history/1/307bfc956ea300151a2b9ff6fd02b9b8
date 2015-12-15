@@ -1,0 +1,12 @@
+package me.haved.engine.core;
+
+public abstract class GameWindow {
+	protected abstract void Init();
+	protected abstract void Update();
+	protected abstract void Resize(int width, int height);
+	protected abstract void KeyEvent(int key, int scancode, int action, int mods);
+	
+	protected void Run() {
+		
+	}
+}

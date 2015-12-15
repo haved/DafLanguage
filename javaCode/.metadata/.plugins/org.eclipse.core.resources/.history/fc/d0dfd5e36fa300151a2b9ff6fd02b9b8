@@ -1,0 +1,49 @@
+package me.haved.engine.core;
+
+import org.lwjgl.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+ 
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.*;
+
+import org.lwjgl.Version;
+
+public abstract class GameWindow {
+	private GLFWErrorCallback errorCallback;
+	private GLFWKeyCallback keyCallback;
+	
+	private long windowHandle;
+	
+	private String title;
+	private int width, height, samples;
+	
+	public GameWindow(String title, int width, int height, int samples) {
+		this.title = title;
+		this.width = width;
+		this.height = height;
+		this.samples = samples;
+	}
+	
+	protected abstract void OnInit();
+	protected abstract void OnRenderFrame();
+	protected abstract void OnResize();
+	protected abstract void OnKeyEvent(int key, int scancode, int action, int mods);
+	
+	protected void Run(int frameRate) {
+		System.out.println("LWJGL Version " + Version.getVersion());
+		
+		glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
+		if( glfwInit() != GLFW_TRUE )
+			throw new IllegalStateException("Unable to initialize GLFW");
+		
+		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		glfwWindowHint(GLFW_SAMPLES, samples);
+		glfwWindowHint(GLFW_REFRESH_RATE, GLFW_DONT_CARE);
+		
+		windowHandle = glfwCreateWindow(width, height, title, NULL, NULL);
+	}
+}
