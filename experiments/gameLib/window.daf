@@ -1,0 +1,45 @@
+#import <string>
+#import <assert>
+
+pub namespace gl::window {
+
+pub class Window implements destructable {
+	width:int;
+	height:int;
+	title:string;	
+	id:usize;	
+
+	def Window:=(self, width:int, height:int, title:string) {
+		self.width  = width;
+		self.height = height;
+		self.title  = title;
+		self.visible = 0;
+	}
+
+	def ~Window:=(self) {
+		Hide();
+	}
+
+	visible:boolean;
+
+	def Show:=(self) {
+		if(!self.visible) {
+			self.id = someSyscallForWindows(width, height, title.c_str());
+			self.visible = true;
+		}
+	}
+
+	def Hide:=(self) {
+		if(self.visible) {
+			someOtherSyscall(id);
+			self.visible = false;
+		}
+	}
+
+	def GetIdForContext:=(self) -> usize {
+		assert(self.visible);
+		id
+	}
+}
+
+}
