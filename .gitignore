@@ -3,3 +3,4 @@
 vimfiles/moveFromVimFiles.sh
 *.class
 javaCode/.metadata/
+javaCode/.recommenders/

@@ -1,7 +1,0 @@
-package me.haved.engine.core;
-
-public class Time {
-	public static void updateDeltaTime() {
-		
-	}
-}

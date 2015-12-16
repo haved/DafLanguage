@@ -40,6 +40,6 @@ public class SmithGameWindow extends GameWindow {
 	public static SmithGameWindow instance;
 	public static void main(String[] args) {
 		instance = new SmithGameWindow("Smith Game", 1600, 900, 8, false);
-		instance.Run(60);
+		instance.Run(75);
 	}
 }

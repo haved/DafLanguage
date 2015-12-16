@@ -78,30 +78,31 @@ public abstract class GameWindow {
 			OnInit();
 			OnResize(width, height);
 			
-			long nanosPerFrame = 1000000000/frameRate;
+			final float msPerFrame = frameRate==0?16:(1000f/frameRate);
 			int framesAgo=0;
-			long startNanos=System.nanoTime();
+			long startTime=System.currentTimeMillis();
 			while(glfwWindowShouldClose(windowHandle)==GLFW_FALSE) {
 				Time.updateDeltaTime();
 				OnRenderFrame();
 				glfwPollEvents();
 				
-				framesAgo++;
-				long passedNanos = System.nanoTime()-startNanos;
-				long suposedToPassNanos = nanosPerFrame*framesAgo;
-				int diffNanos=(int) (passedNanos-suposedToPassNanos);
-				if(diffNanos>0){
-					try {
-						System.out.println(diffNanos);
-						Thread.sleep(diffNanos/1000000, diffNanos%1000000);
-					} catch (Exception e) {
-						e.printStackTrace();
+				if(frameRate > 0) {
+					framesAgo++;
+					long passedTime = System.currentTimeMillis() - startTime;
+					long wantedTime = (long)(framesAgo*msPerFrame);
+					long extraTime = wantedTime-passedTime;
+					if(extraTime>0)
+						try {
+							Thread.sleep(extraTime);
+							Thread.yield();
+						}
+						catch(Exception e) {
+							e.printStackTrace();
+						}
+					if(framesAgo>=frameRate) {
+						startTime+=1000;
+						framesAgo=0;
 					}
-				}
-				if(framesAgo>=frameRate) {
-					startNanos+=1000000000;
-					framesAgo=0;
-					Thread.yield();
 				}
 			}
 			
