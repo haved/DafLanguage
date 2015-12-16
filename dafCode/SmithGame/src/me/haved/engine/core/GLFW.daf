@@ -1,0 +1,6 @@
+pub def extern GLFW_TRUE,GLFW_FALSE:int;
+pub def extern glfwMakeContextCurrent:(long);
+pub def extern glfwSwapBuffers(long);
+pub def extern glfwSetWindowShouldClose(long, int);
+
+//Plus a lot more of cource! Should make a tool to auto-gen maybe?
