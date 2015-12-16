@@ -22,4 +22,8 @@ public class Time {
 	public static long DeltaMillis() {
 		return deltaMillis;
 	}
+	
+	public static long TimeSinceDeltaUpdate() {
+		return System.currentTimeMillis()-prevTimeMillis;
+	}
 }

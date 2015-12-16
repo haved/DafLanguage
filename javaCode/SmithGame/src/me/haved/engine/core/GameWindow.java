@@ -9,8 +9,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.Version;
 
 public abstract class GameWindow {
-	private GLFWErrorCallback errorCallback;
-	private GLFWKeyCallback keyCallback;
+	private GLFWErrorCallback 		errorCallback;
+	private GLFWKeyCallback 		keyCallback;
+	private GLFWWindowSizeCallback 	sizeCallback;
 	
 	private long windowHandle;
 	
@@ -55,6 +56,15 @@ public abstract class GameWindow {
 				}
 			});
 			
+			glfwSetWindowSizeCallback(windowHandle, sizeCallback = new GLFWWindowSizeCallback() {
+				@Override
+				public void invoke(long window, int width, int height) {
+					GameWindow.this.width = width;
+					GameWindow.this.height = height;
+					GameWindow.this.OnResize(width, height);
+				}
+			});
+			
 			GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 			
 			glfwSetWindowPos(windowHandle, (vidmode.width()-width)/2, (vidmode.height()-height)/2);
@@ -68,14 +78,36 @@ public abstract class GameWindow {
 			OnInit();
 			OnResize(width, height);
 			
+			long nanosPerFrame = 1000000000/frameRate;
+			int framesAgo=0;
+			long startNanos=System.nanoTime();
 			while(glfwWindowShouldClose(windowHandle)==GLFW_FALSE) {
 				Time.updateDeltaTime();
-				glfwPollEvents();
 				OnRenderFrame();
+				glfwPollEvents();
+				
+				framesAgo++;
+				long passedNanos = System.nanoTime()-startNanos;
+				long suposedToPassNanos = nanosPerFrame*framesAgo;
+				int diffNanos=(int) (passedNanos-suposedToPassNanos);
+				if(diffNanos>0){
+					try {
+						System.out.println(diffNanos);
+						Thread.sleep(diffNanos/1000000, diffNanos%1000000);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if(framesAgo>=frameRate) {
+					startNanos+=1000000000;
+					framesAgo=0;
+					Thread.yield();
+				}
 			}
 			
 			glfwDestroyWindow(windowHandle);
 			keyCallback.release();
+			sizeCallback.release();
 		} finally {
 			glfwTerminate();
 			errorCallback.release();
