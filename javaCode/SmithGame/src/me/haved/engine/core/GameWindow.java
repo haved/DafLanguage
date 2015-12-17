@@ -8,18 +8,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.Version;
 
-public abstract class GameWindow {
+public class GameWindow {
 	private GLFWErrorCallback 		errorCallback;
 	private GLFWKeyCallback 		keyCallback;
 	private GLFWWindowSizeCallback 	sizeCallback;
 	
 	private long windowHandle;
 	
+	private Game game;
+	
 	private String title;
 	private int width, height, samples;
 	private boolean vsync;
 	
-	public GameWindow(String title, int width, int height, int samples, boolean vsync) {
+	public GameWindow(Game game, String title, int width, int height, int samples, boolean vsync) {
+		this.game       = game;
 		this.title 		= title;
 		this.width 		= width;
 		this.height 	= height;
@@ -27,12 +30,7 @@ public abstract class GameWindow {
 		this.vsync 		= vsync;
 	}
 	
-	protected abstract void OnInit();
-	protected abstract void OnRenderFrame();
-	protected abstract void OnResize(int width, int height);
-	protected abstract void OnKeyEvent(int key, int scancode, int action, int mods);
-	
-	protected void Run(int frameRate) {
+	public void Run(int frameRate) {
 		System.out.println("LWJGL Version " + Version.getVersion());
 		try {
 			glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
@@ -52,7 +50,7 @@ public abstract class GameWindow {
 			glfwSetKeyCallback(windowHandle, keyCallback = new GLFWKeyCallback() {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
-					OnKeyEvent(key, scancode, action, mods);
+					game.OnKeyEvent(key, scancode, action, mods);
 				}
 			});
 			
@@ -61,7 +59,7 @@ public abstract class GameWindow {
 				public void invoke(long window, int width, int height) {
 					GameWindow.this.width = width;
 					GameWindow.this.height = height;
-					GameWindow.this.OnResize(width, height);
+					GameWindow.this.game.Resize(width, height);
 				}
 			});
 			
@@ -75,15 +73,16 @@ public abstract class GameWindow {
 			
 			GL.createCapabilities();
 			
-			OnInit();
-			OnResize(width, height);
+			game.Init(this);
+			game.Resize(width, height);
 			
 			final float msPerFrame = frameRate==0?16:(1000f/frameRate);
 			int framesAgo=0;
 			long startTime=System.currentTimeMillis();
 			while(glfwWindowShouldClose(windowHandle)==GLFW_FALSE) {
 				Time.updateDeltaTime();
-				OnRenderFrame();
+				game.Update();
+				game.Render();
 				glfwPollEvents();
 				
 				if(frameRate > 0) {
