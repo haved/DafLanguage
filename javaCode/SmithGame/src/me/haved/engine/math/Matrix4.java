@@ -37,4 +37,8 @@ public class Matrix4 {
 		System.arraycopy(array, 0, cp.array, 0, ROWS*COLS);
 		return cp;
 	}
+	
+	public void CopyFrom(Matrix4 b) {
+		System.arraycopy(b.array, 0, array, 0, ROWS*COLS);
+	}
 }

@@ -4,6 +4,7 @@ public class Time {
 	
 	private static long  deltaMillis;
 	private static float deltaTime;
+	private static long allMillis;
 	
 	private static long prevTimeMillis=System.currentTimeMillis();
 	public static void updateDeltaTime() {
@@ -13,6 +14,7 @@ public class Time {
 			Time.deltaMillis = newDelta;
 		}
 		prevTimeMillis = System.currentTimeMillis();
+		Time.allMillis+=Time.deltaMillis;
 	}
 	
 	public static float DeltaTime() {
@@ -21,6 +23,10 @@ public class Time {
 	
 	public static long DeltaMillis() {
 		return deltaMillis;
+	}
+	
+	public static long AllMillis() {
+		return allMillis;
 	}
 	
 	public static long TimeSinceDeltaUpdate() {

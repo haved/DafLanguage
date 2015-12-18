@@ -7,6 +7,7 @@ import me.haved.engine.core.FPSCounter;
 import me.haved.engine.core.Game;
 import me.haved.engine.core.GameWindow;
 import me.haved.engine.math.Matrix4;
+import me.haved.engine.scene.GameObject;
 import me.haved.engine.scene.Scene;
 
 public class SmithGame extends Game {
@@ -21,6 +22,9 @@ public class SmithGame extends Game {
 		this.window = window;
 		
 		currentScene = new Scene();
+		GameObject o = new GameObject();
+		o.AddComponent(new TestRenderComponent());
+		currentScene.AddGameObject(o);
 		
 		glClearColor(0.1f, 0.5f, 0.8f, 0.0f);
 	}
@@ -40,7 +44,7 @@ public class SmithGame extends Game {
 	@Override
 	public void Render() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//currentScene.Render();
+		currentScene.Render(perspectiveMatrix);
 		window.SwapBuffers();
 	}
 

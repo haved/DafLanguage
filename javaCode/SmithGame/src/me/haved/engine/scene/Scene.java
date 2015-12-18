@@ -1,17 +1,24 @@
 package me.haved.engine.scene;
 
-import java.util.ArrayList;
+import me.haved.engine.math.Matrix4;
 
 public class Scene {
-	private ArrayList<GameObject> gameObjects;
+	private GameObject rootObject;
 	
 	public Scene() {
-		gameObjects = new ArrayList<>();
+		rootObject = new GameObject();
+		rootObject.SetScene(this);
 	}
 	
 	public void Update() {
-		for(int i = 0; i < gameObjects.size(); i++) {
-			gameObjects.get(i).Update();
-		}
+		rootObject.Update();
+	}
+	
+	public void Render(Matrix4 VP) {
+		rootObject.Render(VP);
+	}
+	
+	public void AddGameObject(GameObject object) {
+		rootObject.AddChild(object);
 	}
 }
