@@ -4,3 +4,9 @@ vimfiles/moveFromVimFiles.sh
 *.class
 javaCode/.metadata/
 javaCode/.recommenders/
+*.tlog
+*.log
+/**/packages/**/
+/**/x86/**/
+/**/x64/**/
+/**/Debug/
