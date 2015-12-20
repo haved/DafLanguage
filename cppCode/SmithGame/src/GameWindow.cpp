@@ -1,6 +1,7 @@
 #include "GameWindow.h"
 #include <iostream>
 #include <GL/glew.h>
+#include "Time.h"
 
 GameWindow::GameWindow(Game * game, const char* title, int width, int height, int samples, bool vsync)
 {
@@ -43,8 +44,8 @@ int GameWindow::Run(int frameRate) {
 
 	m_stayGoing = true;
 	while (m_stayGoing) {
+        UpdateDeltaTime();
 		m_game->NextFrame();
-		SDL_Delay(16);
 		SDL_GL_SwapWindow(m_window);
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
@@ -61,7 +62,7 @@ int GameWindow::Run(int frameRate) {
 
 	SDL_GL_DeleteContext(m_renderContext);
 	SDL_DestroyWindow(m_window);
-	
+
 	SDL_Quit();
 
 	return 0;

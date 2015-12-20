@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1450627164 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
+	"GameWindow.h"
+	<iostream>
+	<GL/glew.h>
+	"Time.h"
+
+1450626071 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.h
+	"Game.h"
+	<SDL2/SDL.h>
+
+1450625630 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
+
+1450627597 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+	"GameWindow.h"
+	"SmithGame.h"
+	<SDL2/SDL.h>
+	<GL/glew.h>
+	"Time.h"
+	<cmath>
+
+1450625630 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+	"Game.h"
+
+1450626614 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Time.h
+
+1450627645 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/Time.cpp
+	"Time.h"
+	<SDL2/SDL.h>
+	<iostream>
+

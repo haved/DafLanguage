@@ -10,3 +10,5 @@ javaCode/.recommenders/
 /**/x86/**/
 /**/x64/**/
 /**/Debug/
+/**/bin/
+/**/obj/
