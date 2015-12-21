@@ -9,6 +9,8 @@ public:
 	void NextFrame();
 	void OnResize(int width, int height);
 	void Destroy();
+	virtual void OnKeyPressed(SDL_Keycode code);
+	virtual void OnKeyReleased(SDL_Keycode code);
 private:
     Scene* scene;
     glm::mat4 projectionMatrix;

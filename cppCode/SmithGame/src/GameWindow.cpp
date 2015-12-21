@@ -54,6 +54,11 @@ int GameWindow::Run(int frameRate) {
 				case SDL_QUIT: SetToClose(); break;
 				case SDL_WINDOWEVENT: if (e.window.event == SDL_WINDOWEVENT_RESIZED)
 										m_game->OnResize(e.window.data1, e.window.data2);
+										break;
+                case SDL_KEYDOWN:
+                    m_game->OnKeyPressed(e.key.keysym.sym); break;
+                case SDL_KEYUP:
+                    m_game->OnKeyReleased(e.key.keysym.sym); break;
 				default: break;
 			}
 		}

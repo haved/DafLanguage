@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450699432 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
+1450732139 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
 	"GameWindow.h"
 	<iostream>
 	<GL/glew.h>
@@ -9,9 +9,10 @@
 	"Game.h"
 	<SDL2/SDL.h>
 
-1450625630 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
+1450732208 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
+	<SDL2/SDL_keycode.h>
 
-1450730026 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1450733018 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
 	"GameObject.h"
@@ -19,8 +20,9 @@
 	<GL/glew.h>
 	<memory>
 	<glm/gtx/transform.hpp>
+	"Time.h"
 
-1450702994 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+1450732270 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
 	"Game.h"
 	"Scene.h"
 	<glm/glm.hpp>
@@ -45,7 +47,7 @@
 	<algorithm>
 	<glm/gtx/transform.hpp>
 
-1450711128 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
+1450730762 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
 	"TestComponent.h"
 	"../Time.h"
 	<glm/gtx/transform.hpp>
