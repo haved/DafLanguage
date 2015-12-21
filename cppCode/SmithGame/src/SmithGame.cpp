@@ -8,19 +8,22 @@
 #include <glm/gtx/transform.hpp>
 
 float FOV = 3.14159265f/2;
+float TAU = 3.14159265f*2;
 
 void SmithGame::Init() {
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene = new Scene();
-    std::shared_ptr<GameObject> object = std::make_shared<GameObject>();
-    object->GetMutPosPointer()->z+=3;
-    object->AddComponent(std::make_shared<TestComponent>(1.f));
-    scene->AddObject(object);
-    std::shared_ptr<GameObject> object2 = std::make_shared<GameObject>();
-    object2->GetMutPosPointer()->x+=3;
-    object2->AddComponent(std::make_shared<TestComponent>(0));
-    object->AddChild(object2);
+    auto prev = std::make_shared<GameObject>();
+    scene->AddObject(prev);
+    for(int i = 0; i < 18; i++) {
+        std::shared_ptr<GameObject> object = std::make_shared<GameObject>();
+        object->GetMutRotPointer()->y=TAU/18;
+        object->GetMutPosPointer()->x=2;
+        object->AddComponent(std::make_shared<TestComponent>(.5f));
+        prev->AddChild(object);
+        prev=object;
+    }
 }
 
 glm::vec3 camPos(0, -5, 5);
