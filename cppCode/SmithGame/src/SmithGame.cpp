@@ -30,13 +30,14 @@ void SmithGame::Init() {
     }
 }
 
-bool w,a,s,d;
+bool w,a,s,d,pause=true;
 glm::vec3 walkVector;
 glm::vec3 camPos(0, 0, 10);
 glm::vec3 camTarget(0, 0, 0);
 void SmithGame::NextFrame() {
     camPos += walkVector*(GetDeltaTime()*30);
-    scene->Update();
+    if(!pause)
+        scene->Update();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glm::mat4 view = glm::lookAt(camPos, camTarget, glm::vec3(0, 1, 0));
     scene->Render(projectionMatrix*view);
@@ -53,6 +54,7 @@ void SmithGame::OnKeyPressed(SDL_Keycode code) {
         case SDLK_a: a=true; break;
         case SDLK_s: s=true; break;
         case SDLK_d: d=true; break;
+        case SDLK_SPACE: pause=!pause; break;
         default: break;
     }
     int x = 0;
