@@ -14,12 +14,13 @@ void SmithGame::Init() {
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene = new Scene();
     std::shared_ptr<GameObject> object = std::make_shared<GameObject>();
+    object->GetMutPosPointer()->z+=3;
     object->AddComponent(std::make_shared<TestComponent>(1.f));
     scene->AddObject(object);
     std::shared_ptr<GameObject> object2 = std::make_shared<GameObject>();
-    object2->GetMutPosPointer()->z+=2;
-    object2->AddComponent(std::make_shared<TestComponent>(1.3f));
-    scene->AddObject(object2);
+    object2->GetMutPosPointer()->x+=3;
+    object2->AddComponent(std::make_shared<TestComponent>(0));
+    object->AddChild(object2);
 }
 
 glm::vec3 camPos(0, -5, 5);

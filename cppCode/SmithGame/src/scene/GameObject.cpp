@@ -57,7 +57,7 @@ void GameObject::Render(const glm::mat4 &VP) {
         if(parent==NULL)
             globalModelspace = localModelspace;
         else
-            globalModelspace = localModelspace * parent->globalModelspace;
+            globalModelspace = parent->globalModelspace * localModelspace;
 
         for(unsigned int i = 0; i < children.size(); i++)
             children[i]->globalChanged = true;
