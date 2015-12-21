@@ -8,13 +8,12 @@ class GameObject;
 class GameComponent
 {
     public:
-        virtual void OnSceneSet(Scene* scene);
-        inline void SetParent(GameObject* parent) {
-            this->parent = parent;
-        }
+        virtual void SetParent(GameObject* parent){};
+        virtual void OnAddedToScene(Scene* parent){};
+        virtual void BeforeRemovedFromScene(Scene* parent){};
         virtual void Update()=0;
-        virtual void Render(glm::mat4 &VP)=0;
+        virtual void Render(const glm::mat4 &MVP)=0;
     protected:
-        GameObject* parent;
+        GameObject* parent=NULL;
     private:
 };

@@ -41,6 +41,7 @@ int GameWindow::Run(int frameRate) {
 	}
 
 	m_game->Init();
+	m_game->OnResize(m_width, m_height);
 
 	m_stayGoing = true;
 	while (m_stayGoing) {

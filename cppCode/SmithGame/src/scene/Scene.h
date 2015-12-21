@@ -6,9 +6,10 @@
 
 class Scene {
     public:
-        void AddObject(GameObject& object);
+        Scene();
+        void AddObject(std::shared_ptr<GameObject> object);
         void Update();
-        void Render(glm::mat4 &VP);
+        void Render(const glm::mat4 &VP);
     private:
         GameObject root;
 };

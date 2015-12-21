@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450627164 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
+1450699432 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
 	"GameWindow.h"
 	<iostream>
 	<GL/glew.h>
@@ -11,17 +11,19 @@
 
 1450625630 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
 
-1450633698 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1450711088 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
-	<SDL2/SDL.h>
+	"GameObject.h"
+	"game/TestComponent.h"
 	<GL/glew.h>
-	"Time.h"
-	<cmath>
-	<glm/common.hpp>
+	<memory>
+	<glm/gtx/transform.hpp>
 
-1450625630 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+1450702994 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
 	"Game.h"
+	"Scene.h"
+	<glm/glm.hpp>
 
 1450626614 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Time.h
 
@@ -34,34 +36,38 @@
 	"GameComponent.h"
 	"Scene.h"
 
-1450635101 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameComponent.h
+1450709180 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameComponent.h
 	<glm/glm.hpp>
 
-1450635985 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.cpp
+1450710956 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.cpp
 	"GameObject.h"
 	"Scene.h"
 	<algorithm>
+	<glm/gtx/transform.hpp>
+	<iostream>
 
-1450636435 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
+1450710324 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
 	"TestComponent.h"
 	"../Time.h"
 	<glm/gtx/transform.hpp>
 	<GL/glew.h>
+	"GameObject.h"
+	<iostream>
 
-1450636431 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
+1450708867 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
 	"GameComponent.h"
 
-1450635895 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.h
+1450710981 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.h
 	"GameObject.h"
 	<memory>
 	<glm/common.hpp>
 
-1450635726 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.h
+1450710933 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.h
 	<vector>
 	<memory>
 	"GameComponent.h"
-	<glm/common.hpp>
+	<glm/glm.hpp>
 
-1450636574 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.cpp
+1450710968 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.cpp
 	"Scene.h"
 

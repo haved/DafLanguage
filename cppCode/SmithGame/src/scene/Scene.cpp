@@ -1,14 +1,17 @@
 #include "Scene.h"
 
-void Scene::AddObject(GameObject& object) {
+Scene::Scene(){
+    root.SetSceneRecursivly(this);
+}
+
+void Scene::AddObject(std::shared_ptr<GameObject> object) {
     root.AddChild(object);
-    object.SetScene(this);
 }
 
 void Scene::Update() {
     root.Update();
 }
 
-void Scene::Render(glm::mat4 &VP) {
+void Scene::Render(const glm::mat4 &VP) {
     root.Render(VP);
 }
