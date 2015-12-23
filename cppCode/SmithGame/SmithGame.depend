@@ -12,19 +12,20 @@
 1450732208 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
 	<SDL2/SDL_keycode.h>
 
-1450733352 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1450876099 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
-	"GameObject.h"
+	"scene/GameObject.h"
 	"game/TestComponent.h"
 	<GL/glew.h>
 	<memory>
 	<glm/gtx/transform.hpp>
 	"Time.h"
+	"rendering/Mesh.h"
 
-1450732270 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+1450874138 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
 	"Game.h"
-	"Scene.h"
+	"scene/Scene.h"
 	<glm/glm.hpp>
 
 1450626614 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Time.h
@@ -47,15 +48,15 @@
 	<algorithm>
 	<glm/gtx/transform.hpp>
 
-1450730762 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
+1450873907 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
 	"TestComponent.h"
 	"../Time.h"
 	<glm/gtx/transform.hpp>
 	<GL/glew.h>
-	"GameObject.h"
+	"../scene/GameObject.h"
 
-1450708867 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
-	"GameComponent.h"
+1450873902 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
+	"../scene/GameComponent.h"
 
 1450710981 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.h
 	"GameObject.h"
@@ -70,4 +71,17 @@
 
 1450710968 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.cpp
 	"Scene.h"
+
+1450876069 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
+	"Mesh.h"
+	<GL/glew.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+
+1450876142 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.h
+	<glm/glm.hpp>
+	<string>
+	<GL/glew.h>
 

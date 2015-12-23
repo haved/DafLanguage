@@ -32,7 +32,22 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="src/Game.h" />
+		<Unit filename="src/GameWindow.cpp" />
+		<Unit filename="src/GameWindow.h" />
+		<Unit filename="src/SmithGame.cpp" />
+		<Unit filename="src/SmithGame.h" />
+		<Unit filename="src/Time.cpp" />
+		<Unit filename="src/Time.h" />
+		<Unit filename="src/game/TestComponent.cpp" />
+		<Unit filename="src/game/TestComponent.h" />
+		<Unit filename="src/rendering/Mesh.cpp" />
+		<Unit filename="src/rendering/Mesh.h" />
+		<Unit filename="src/scene/GameComponent.h" />
+		<Unit filename="src/scene/GameObject.cpp" />
+		<Unit filename="src/scene/GameObject.h" />
+		<Unit filename="src/scene/Scene.cpp" />
+		<Unit filename="src/scene/Scene.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

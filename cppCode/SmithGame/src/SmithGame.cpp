@@ -1,20 +1,28 @@
 #include "GameWindow.h"
 #include "SmithGame.h"
-#include "GameObject.h"
+#include "scene/GameObject.h"
 #include "game/TestComponent.h"
 #include <GL/glew.h>
 #include <memory>
 #define  GLM_FORCE_RADIANS
 #include <glm/gtx/transform.hpp>
 #include "Time.h"
+#include "rendering/Mesh.h"
 
 float FOV = 3.14159265f/2;
 float TAU = 3.14159265f*2;
+
+std::string SmithGame::RES_PATH="./res/";
 
 void SmithGame::Init() {
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene = new Scene();
+    auto object = std::make_shared<GameObject>();
+    Mesh meMesh(RES_PATH+"mesh/cubeThing.plybin");
+}
+
+void SmithGame::funkyBoxes() {
     auto prev = std::make_shared<GameObject>();
     scene->AddObject(prev);
     float boxes=100;

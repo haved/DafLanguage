@@ -3,7 +3,7 @@
 #define GLM_FORCE_RADIANS
 #include <glm/gtx/transform.hpp>
 #include <GL/glew.h>
-#include "GameObject.h"
+#include "../scene/GameObject.h"
 
 void TestComponent::SetParent(GameObject* parent) {
     this->parent = parent;

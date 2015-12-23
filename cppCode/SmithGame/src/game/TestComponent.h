@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameComponent.h"
+#include "../scene/GameComponent.h"
 
 class TestComponent : public GameComponent {
     public:
