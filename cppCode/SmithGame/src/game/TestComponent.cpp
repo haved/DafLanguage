@@ -12,34 +12,12 @@ void TestComponent::SetParent(GameObject* parent) {
 }
 
 void TestComponent::Update() {
-    this->parent->GetMutRotPointer()->z+=GetDeltaTime()*speed;
+    this->parent->GetMutRotPointer()->z+=GetDeltaTime()*m_speed;
 }
 
 void TestComponent::Render(const glm::mat4 &MVP) {
     glPushMatrix();
     glLoadMatrixf(&MVP[0][0]);
-    double tmp;
-    glBegin(GL_QUADS);
-    glColor3f(modf(GetCurrentMillis()/1111.f, &tmp), modf(GetCurrentMillis()/2099.f, &tmp), modf(GetCurrentMillis()/3667.f, &tmp));
-    glVertex3f(-1, -1, -1);
-    glVertex3f( 1, -1, -1);
-    glVertex3f( 1, -1,  1);
-    glVertex3f(-1, -1,  1);
-    glColor3f(modf(GetCurrentMillis()/2350.f, &tmp), modf(GetCurrentMillis()/3861.f, &tmp), modf(GetCurrentMillis()/1145.f, &tmp));
-    glVertex3f( 1, -1, -1);
-    glVertex3f( 1,  1, -1);
-    glVertex3f( 1,  1,  1);
-    glVertex3f( 1, -1,  1);
-    glColor3f(modf(GetCurrentMillis()/3100.f, &tmp), modf(GetCurrentMillis()/1560.f, &tmp), modf(GetCurrentMillis()/2050.f, &tmp));
-    glVertex3f(-1, -1, -1);
-    glVertex3f(-1, -1,  1);
-    glVertex3f(-1,  1,  1);
-    glVertex3f(-1,  1, -1);
-    glColor3f(modf(GetCurrentMillis()/2500.f, &tmp), modf(GetCurrentMillis()/1750.f, &tmp), modf(GetCurrentMillis()/3111.f, &tmp));
-    glVertex3f(-1,  1, -1);
-    glVertex3f(-1,  1,  1);
-    glVertex3f( 1,  1,  1);
-    glVertex3f( 1,  1, -1);
-    glEnd();
+    m_mesh->Draw();
     glPopMatrix();
 }

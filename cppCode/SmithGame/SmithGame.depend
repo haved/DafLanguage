@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1450732139 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
+1450886416 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
 	"GameWindow.h"
 	<iostream>
 	<GL/glew.h>
 	"Time.h"
+	<glm/glm.hpp>
 
 1450626071 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.h
 	"Game.h"
@@ -12,7 +13,7 @@
 1450732208 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
 	<SDL2/SDL_keycode.h>
 
-1450876099 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1450892124 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
 	"scene/GameObject.h"
@@ -23,7 +24,7 @@
 	"Time.h"
 	"rendering/Mesh.h"
 
-1450874138 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+1450892093 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
 	"Game.h"
 	"scene/Scene.h"
 	<glm/glm.hpp>
@@ -48,15 +49,17 @@
 	<algorithm>
 	<glm/gtx/transform.hpp>
 
-1450873907 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
+1450892023 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
 	"TestComponent.h"
 	"../Time.h"
 	<glm/gtx/transform.hpp>
 	<GL/glew.h>
 	"../scene/GameObject.h"
 
-1450873902 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
+1450892240 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
 	"../scene/GameComponent.h"
+	"../rendering/Mesh.h"
+	<memory>
 
 1450710981 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.h
 	"GameObject.h"
@@ -72,7 +75,7 @@
 1450710968 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.cpp
 	"Scene.h"
 
-1450876069 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
+1450891500 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
 	"Mesh.h"
 	<GL/glew.h>
 	<iostream>

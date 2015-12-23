@@ -11,23 +11,45 @@ Mesh::Mesh(const std::string &filepath) {
         std::cerr << "Filed to open file " << filepath << "! Aborting!" << std::endl;
         assert(false);
     }
-    std::streampos memsize = file.tellg();
-    auto memblock = new char [size];
+    std::streampos memsize_pos = file.tellg();
+    uint32_t memsize = (uint32_t) memsize_pos;
     file.seekg (0, std::ios::beg);
-    file.read (memblock, size);
-    file.close();
 
-    if(memsize < 7) {
-        std::cerr << "File " << filepath << " was less than 7 bytes long! Aborting!" << std::endl;
+    uint32_t header_mem[2];
+    uint32_t neededSize = sizeof(uint32_t)*2;
+    if(memsize < neededSize) {
+        std::cerr << "File " << filepath << " was less than 8 bytes long! Aborting!" << std::endl;
         assert(false);
     }
-    uint32_t vertexCount = *((uint32_t*)&memblock[0]);
-    uint32_t faceCount = *((uint32_t*)&memblock[4]);
+    file.read ((char*)header_mem, sizeof(uint32_t)*2);
 
-    std::cout << "vertexCount=" << vertexCount << std::endl;
-    std::cout << "faceCount=" << faceCount << std::endl;
+    uint32_t vertexCount = header_mem[0];
+    uint32_t indexCount = header_mem[1]*3;
 
-    delete[] memblock;
+    Vertex* vertices = new Vertex[vertexCount];
+    neededSize += sizeof(Vertex) * vertexCount;
+    if(memsize < neededSize) {
+        std::cerr << "File " << filepath << " was not long engough for " << vertexCount << " vertices! Aborting!" << std::endl;
+        assert(false);
+    }
+    file.read((char*)vertices, sizeof(Vertex)*vertexCount);
+
+    uint32_t* indices = new uint32_t[indexCount];
+    neededSize += sizeof(uint32_t) * indexCount;
+    if(memsize < neededSize) {
+        std::cerr << "File " << filepath << " was not long engough for " << indexCount << " indices! Aborting!" << std::endl;
+        assert(false);
+    }
+    file.read((char*)indices, sizeof(uint32_t)*indexCount);
+
+    std::cout << memsize << " / " << neededSize << std::endl;
+
+    file.close();
+
+    LoadMeshData(vertices, header_mem[0], indices, indexCount);
+
+    delete[] vertices;
+    delete[] indices;
 }
 
 Mesh::Mesh(Vertex vertices[], uint32_t vertexCount, uint32_t indices[], uint32_t indexCount)
@@ -69,12 +91,12 @@ void Mesh::Draw()
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), NULL);
 	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)sizeof(glm::vec3));
 	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(glm::vec3)*2));
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

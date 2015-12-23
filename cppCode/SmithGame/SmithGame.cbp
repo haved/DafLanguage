@@ -29,6 +29,11 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-O3" />
+			<Add option="-Wmissing-include-dirs" />
+			<Add option="-Wmain" />
+			<Add option="-pedantic" />
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>

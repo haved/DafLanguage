@@ -1,14 +1,16 @@
 #pragma once
 
 #include "../scene/GameComponent.h"
+#include "../rendering/Mesh.h"
+#include <memory>
 
 class TestComponent : public GameComponent {
     public:
-        TestComponent(float mspeed) : speed(mspeed) {}
+        TestComponent(float speed, std::shared_ptr<Mesh> mesh) : m_speed(speed), m_mesh(mesh) {}
         void SetParent(GameObject* parent);
         void Update();
         void Render(const glm::mat4 &VP);
     private:
-        float speed;
-        glm::mat4 modelspace;
+        float m_speed;
+        std::shared_ptr<Mesh> m_mesh;
 };

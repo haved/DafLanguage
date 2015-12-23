@@ -2,6 +2,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include "Time.h"
+#include <glm/glm.hpp>
 
 GameWindow::GameWindow(Game * game, const char* title, int width, int height, int samples, bool vsync)
 {
@@ -14,7 +15,7 @@ GameWindow::GameWindow(Game * game, const char* title, int width, int height, in
 }
 
 int GameWindow::Run(int frameRate) {
-	std::cout << "Running application! " << std::endl;
+	std::cout << "Running application!" << std::endl;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		std::cerr << "SDL failed to Init! Aborting!" << std::endl;

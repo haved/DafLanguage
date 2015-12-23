@@ -19,10 +19,12 @@ void SmithGame::Init() {
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene = new Scene();
     auto object = std::make_shared<GameObject>();
-    Mesh meMesh(RES_PATH+"mesh/cubeThing.plybin");
+    auto mesh = std::make_shared<Mesh>(RES_PATH+"mesh/cubeThing.plybin");
+    object->AddComponent(std::make_shared<TestComponent>(0, mesh));
+    scene->AddObject(object);
 }
 
-void SmithGame::funkyBoxes() {
+/*void SmithGame::funkyBoxes() {
     auto prev = std::make_shared<GameObject>();
     scene->AddObject(prev);
     float boxes=100;
@@ -32,11 +34,11 @@ void SmithGame::funkyBoxes() {
         std::shared_ptr<GameObject> object = std::make_shared<GameObject>();
         object->GetMutRotPointer()->y=TAU/boxes;
         object->GetMutPosPointer()->x=dist;
-        object->AddComponent(std::make_shared<TestComponent>(speed));
+        object->AddComponent(std::make_shared<TestComponent>(speed);
         prev->AddChild(object);
         prev=object;
     }
-}
+}*/
 
 bool w,a,s,d,pause=true;
 glm::vec3 walkVector;
