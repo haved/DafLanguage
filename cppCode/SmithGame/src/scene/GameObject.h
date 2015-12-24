@@ -60,6 +60,7 @@ public:
     inline void SetToRenderSelf() {
         renderSelf = true;
     }
+    const glm::mat4& GetGlobalModelspace();
 private:
     std::vector<std::shared_ptr<GameObject>> children {};
     std::vector<std::shared_ptr<GameComponent>> components {};

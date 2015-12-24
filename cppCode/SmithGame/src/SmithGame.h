@@ -13,7 +13,6 @@ public:
 	virtual void OnKeyPressed(SDL_Keycode code);
 	virtual void OnKeyReleased(SDL_Keycode code);
 private:
-    //void funkyBoxes();
     Scene* scene;
     glm::mat4 projectionMatrix;
 };

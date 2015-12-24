@@ -42,7 +42,9 @@ Mesh::Mesh(const std::string &filepath) {
     }
     file.read((char*)indices, sizeof(uint32_t)*indexCount);
 
-    std::cout << memsize << " / " << neededSize << std::endl;
+    if(memsize!=neededSize) {
+        std::clog << "Warning: The mesh file " << filepath << " was longer than specified in it's header! " << neededSize << "/" << memsize << std::endl;
+    }
 
     file.close();
 

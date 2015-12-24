@@ -20,25 +20,11 @@ void SmithGame::Init() {
     scene = new Scene();
     auto object = std::make_shared<GameObject>();
     auto mesh = std::make_shared<Mesh>(RES_PATH+"mesh/cubeThing.plybin");
-    object->AddComponent(std::make_shared<TestComponent>(0, mesh));
+    auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader.vs", RES_PATH+"shader/BasicShader.fs");
+    shader->LoadToGPU();
+    object->AddComponent(std::make_shared<TestComponent>(0, mesh,shader));
     scene->AddObject(object);
 }
-
-/*void SmithGame::funkyBoxes() {
-    auto prev = std::make_shared<GameObject>();
-    scene->AddObject(prev);
-    float boxes=100;
-    int dist=5;
-    float speed = 0.1f;
-    for(int i = 0; i < boxes; i++) {
-        std::shared_ptr<GameObject> object = std::make_shared<GameObject>();
-        object->GetMutRotPointer()->y=TAU/boxes;
-        object->GetMutPosPointer()->x=dist;
-        object->AddComponent(std::make_shared<TestComponent>(speed);
-        prev->AddChild(object);
-        prev=object;
-    }
-}*/
 
 bool w,a,s,d,pause=true;
 glm::vec3 walkVector;

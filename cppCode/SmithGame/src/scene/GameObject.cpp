@@ -46,7 +46,7 @@ void GameObject::Update() {
     }
 }
 
-void GameObject::Render(const glm::mat4 &VP) {
+const glm::mat4& GameObject::GetGlobalModelspace() {
     if(localChanged) {
         localModelspace = glm::translate(pos) * glm::rotate(rot.z, glm::vec3(0,0,1)) * glm::rotate(rot.x, glm::vec3(1,0,0)) * glm::rotate(rot.y, glm::vec3(0,1,0)) * glm::scale(scale);
         localChanged = false;
@@ -63,9 +63,12 @@ void GameObject::Render(const glm::mat4 &VP) {
             children[i]->globalChanged = true;
         globalChanged = false;
     }
+    return globalModelspace;
+}
 
+void GameObject::Render(const glm::mat4 &VP) {
     if(renderSelf) {
-        glm::mat4 MVP = VP*globalModelspace;
+        glm::mat4 MVP = VP*GetGlobalModelspace();
         for(unsigned int i = 0; i < components.size(); i++) {
             components[i]->Render(MVP);
         }

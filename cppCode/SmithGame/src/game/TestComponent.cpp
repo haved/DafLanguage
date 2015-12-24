@@ -15,9 +15,11 @@ void TestComponent::Update() {
     this->parent->GetMutRotPointer()->z+=GetDeltaTime()*m_speed;
 }
 
+glm::vec4 white(1,1,1,1);
 void TestComponent::Render(const glm::mat4 &MVP) {
-    glPushMatrix();
-    glLoadMatrixf(&MVP[0][0]);
+    m_shader->Bind();
+    m_shader->SetMVP(MVP);
+    m_shader->SetModelspaceMatrix(parent->GetGlobalModelspace());
+    m_shader->SetColor(white);
     m_mesh->Draw();
-    glPopMatrix();
 }

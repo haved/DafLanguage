@@ -13,7 +13,7 @@
 1450732208 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
 	<SDL2/SDL_keycode.h>
 
-1450892124 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1450969579 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
 	"scene/GameObject.h"
@@ -24,7 +24,7 @@
 	"Time.h"
 	"rendering/Mesh.h"
 
-1450892093 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+1450969085 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
 	"Game.h"
 	"scene/Scene.h"
 	<glm/glm.hpp>
@@ -43,30 +43,31 @@
 1450709180 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameComponent.h
 	<glm/glm.hpp>
 
-1450730012 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.cpp
+1450969395 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.cpp
 	"GameObject.h"
 	"Scene.h"
 	<algorithm>
 	<glm/gtx/transform.hpp>
 
-1450892023 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
+1450969467 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.cpp
 	"TestComponent.h"
 	"../Time.h"
 	<glm/gtx/transform.hpp>
 	<GL/glew.h>
 	"../scene/GameObject.h"
 
-1450892240 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
+1450969353 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
 	"../scene/GameComponent.h"
 	"../rendering/Mesh.h"
 	<memory>
+	"../rendering/shaders/BasicShader.h"
 
 1450710981 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.h
 	"GameObject.h"
 	<memory>
 	<glm/common.hpp>
 
-1450710933 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.h
+1450969337 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/GameObject.h
 	<vector>
 	<memory>
 	"GameComponent.h"
@@ -75,7 +76,7 @@
 1450710968 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.cpp
 	"Scene.h"
 
-1450891500 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
+1450893433 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
 	"Mesh.h"
 	<GL/glew.h>
 	<iostream>
@@ -87,4 +88,22 @@
 	<glm/glm.hpp>
 	<string>
 	<GL/glew.h>
+
+1450969771 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Shader.cpp
+	"Shader.h"
+	<iostream>
+	<fstream>
+
+1450963601 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Shader.h
+	<GL/glew.h>
+	<string>
+
+1450969647 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/shaders/BasicShader.cpp
+	"BasicShader.h"
+
+1450969682 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/shaders/BasicShader.h
+	"../Shader.h"
+	<glm/glm.hpp>
+	<GL/glew.h>
+	<string>
 
