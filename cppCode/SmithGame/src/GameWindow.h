@@ -10,6 +10,12 @@ public:
 	void UseRenderContext();
 	void UseThreadContext();
 	void SetToClose();
+	inline bool StayGoing() {
+        return m_stayGoing;
+	}
+	inline Game* GetGame() {
+        return m_game;
+	}
 private:
 	Game* m_game;
 	const char* m_title;

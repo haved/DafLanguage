@@ -8,6 +8,7 @@
 #include <glm/gtx/transform.hpp>
 #include "Time.h"
 #include "rendering/Mesh.h"
+#include <iostream>
 
 float FOV = 3.14159265f/2;
 float TAU = 3.14159265f*2;
@@ -22,8 +23,16 @@ void SmithGame::Init() {
     auto mesh = std::make_shared<Mesh>(RES_PATH+"mesh/cubeThing.plybin");
     auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader.vs", RES_PATH+"shader/BasicShader.fs");
     shader->LoadToGPU();
-    object->AddComponent(std::make_shared<TestComponent>(0, mesh,shader));
+    object->AddComponent(std::make_shared<TestComponent>(.8f, mesh,shader));
     scene->AddObject(object);
+}
+
+void SmithGame::Destroy() {
+    delete scene;
+}
+
+void SmithGame::LoaderUpdate() {
+    std::cout << "Second thread!" << std::endl;
 }
 
 bool w,a,s,d,pause=true;
@@ -85,10 +94,6 @@ void SmithGame::OnKeyReleased(SDL_Keycode code) {
     if(d)
         x++;
     walkVector = glm::vec3(x, y, 0);
-}
-
-void SmithGame::Destroy() {
-    delete scene;
 }
 
 int main(int argc, char *argv[]) {

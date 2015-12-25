@@ -48,6 +48,10 @@
 		<Unit filename="src/game/TestComponent.h" />
 		<Unit filename="src/rendering/Mesh.cpp" />
 		<Unit filename="src/rendering/Mesh.h" />
+		<Unit filename="src/rendering/Shader.cpp" />
+		<Unit filename="src/rendering/Shader.h" />
+		<Unit filename="src/rendering/shaders/BasicShader.cpp" />
+		<Unit filename="src/rendering/shaders/BasicShader.h" />
 		<Unit filename="src/scene/GameComponent.h" />
 		<Unit filename="src/scene/GameObject.cpp" />
 		<Unit filename="src/scene/GameObject.h" />

@@ -9,4 +9,5 @@ public:
 	virtual void Destroy()=0;
 	virtual void OnKeyPressed(SDL_Keycode code)=0;
 	virtual void OnKeyReleased(SDL_Keycode code)=0;
+	virtual void LoaderUpdate()=0;
 };
