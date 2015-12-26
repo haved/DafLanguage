@@ -18,21 +18,24 @@ std::string SmithGame::RES_PATH="./res/";
 void SmithGame::Init() {
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.3f, 0.5f, 0.9f, 1);
-    scene = new Scene();
+    scene  = new Scene();
+    assets = new AssetSystem();
+    int mesh = assets->AddMeshAsset(RES_PATH+"mesh/cubeThing.plybin");
     auto object = std::make_shared<GameObject>();
-    auto mesh = std::make_shared<MeshRaw>(RES_PATH+"mesh/cubeThing.plybin");
     auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader.vs", RES_PATH+"shader/BasicShader.fs");
     shader->LoadToGPU();
-    object->AddComponent(std::make_shared<TestComponent>(.8f,mesh,shader));
+    object->AddComponent(std::make_shared<TestComponent>(.8f,assets->LoadMesh(mesh),shader));
+    assets->DoAllLoading();
     scene->AddObject(object);
 }
 
 void SmithGame::Destroy() {
     delete scene;
+    delete assets;//Oh boy!
 }
 
 void SmithGame::LoaderUpdate() {
-
+    //assets->DoAllLoading();
 }
 
 bool w,a,s,d,pause=true;

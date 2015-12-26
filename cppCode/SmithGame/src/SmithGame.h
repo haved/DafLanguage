@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "scene/Scene.h"
 #include <glm/glm.hpp>
+#include "asset/AssetSystem.h"
 
 class SmithGame : public Game {
 public:
@@ -15,5 +16,6 @@ public:
     void LoaderUpdate();
 private:
     Scene* scene;
+    AssetSystem* assets;
     glm::mat4 projectionMatrix;
 };

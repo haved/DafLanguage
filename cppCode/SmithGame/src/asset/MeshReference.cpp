@@ -8,6 +8,6 @@ MeshReference::~MeshReference() {
     m_assets->OnReferenceRemoved(m_meshId);
 }
 
-inline void MeshReference::Draw() {
+void MeshReference::Draw() {
     m_assets->GetLoadedMeshClass(m_meshId)->Draw();
 }

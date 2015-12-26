@@ -1,7 +1,9 @@
 #include "AssetSystem.h"
 
-AssetSystem::AssetSystem() : m_meshClasses({}), m_meshReferenceCounts({}), m_loadStack({}), m_unloadStack({}) {
+#include <iostream>
 
+AssetSystem::AssetSystem() : m_meshClasses({}), m_meshReferenceCounts({}), m_loadStack({}), m_unloadStack({}) {
+    std::cout << "Asset system created!" << std::endl;
 }
 
 uint32_t AssetSystem::AddMeshAsset(const std::string& filepath) {
@@ -34,10 +36,12 @@ void AssetSystem::OnReferenceRemoved(uint32_t meshId) {
 
 void AssetSystem::DoAllLoading() {
     while(m_unloadStack.size() > 0) {
+        std::cout << "Unloading mesh " << m_unloadStack.back() << std::endl;
         m_meshClasses[m_unloadStack.back()].UnloadMesh();
         m_unloadStack.pop_back();
     }
     while(m_loadStack.size() > 0) {
+        std::cout << "Loading mesh " << m_loadStack.back() << std::endl;
         m_meshClasses[m_loadStack.back()].LoadMesh();
         m_loadStack.pop_back();
     }

@@ -13,7 +13,7 @@
 1450979519 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
 	<SDL2/SDL_keycode.h>
 
-1451127929 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1451149339 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
 	"scene/GameObject.h"
@@ -25,10 +25,11 @@
 	"rendering/MeshRaw.h"
 	<iostream>
 
-1450979511 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
+1451146574 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
 	"Game.h"
 	"scene/Scene.h"
 	<glm/glm.hpp>
+	"asset/AssetSystem.h"
 
 1450626614 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Time.h
 
@@ -57,9 +58,9 @@
 	<GL/glew.h>
 	"../scene/GameObject.h"
 
-1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
+1451148475 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
 	"../scene/GameComponent.h"
-	"../rendering/MeshRaw.h"
+	"../asset/MeshReference.h"
 	<memory>
 	"../rendering/shaders/BasicShader.h"
 
@@ -263,8 +264,9 @@
 1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Vertex.h
 	<glm/glm.hpp>
 
-1451134529 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.cpp
+1451135021 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.cpp
 	"AssetSystem.h"
+	<iostream>
 
 1451134518 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.h
 	<vector>
@@ -275,7 +277,7 @@
 1451134603 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.h
 	<inttypes.h>
 
-1451134005 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.cpp
+1451148497 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.cpp
 	"MeshReference.h"
 	"AssetSystem.h"
 
