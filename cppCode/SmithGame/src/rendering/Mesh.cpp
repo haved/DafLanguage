@@ -7,7 +7,7 @@
 
 #include "MeshPlybinLoader.h"
 
-Mesh::Mesh(const std::string &filepath) : m_loaded(false), m_filepath(filepath), m_vbo(0), m_ibo(0), m_indexCount(0) {
+Mesh::Mesh(const std::string &filepath) : m_filepath(filepath), m_loaded(false), m_vbo(0), m_ibo(0), m_indexCount(0) {
 
 }
 

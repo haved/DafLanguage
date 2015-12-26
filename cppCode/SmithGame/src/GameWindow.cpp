@@ -44,7 +44,7 @@ int GameWindow::Run(int frameRate) {
 		return -1;
 	}
 	SDL_GL_SetAttribute(SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1);
-	m_threadContext = SDL_GL_CreateContext(m_window);
+	//m_threadContext = SDL_GL_CreateContext(m_window);
 	m_renderContext = SDL_GL_CreateContext(m_window);
 
 	if(glewInit() != GLEW_OK) {
@@ -56,7 +56,7 @@ int GameWindow::Run(int frameRate) {
 	m_game->OnResize(m_width, m_height);
 
 	m_stayGoing = true;
-    SDL_Thread* loaderThread = SDL_CreateThread(loadThread, "SmithGame_Loader_thread", (void*)this);
+    //SDL_Thread* loaderThread = SDL_CreateThread(loadThread, "SmithGame_Loader_thread", (void*)this);
 	while (m_stayGoing) {
         UpdateDeltaTime();
 		m_game->NextFrame();
@@ -79,9 +79,9 @@ int GameWindow::Run(int frameRate) {
 
 	m_game->Destroy();
 
-    int threadReturnValue;
-    SDL_WaitThread(loaderThread, &threadReturnValue);
-    SDL_GL_DeleteContext(m_threadContext);
+    //int threadReturnValue;
+    //SDL_WaitThread(loaderThread, &threadReturnValue);
+    //SDL_GL_DeleteContext(m_threadContext);
 	SDL_GL_DeleteContext(m_renderContext);
 	SDL_DestroyWindow(m_window);
 

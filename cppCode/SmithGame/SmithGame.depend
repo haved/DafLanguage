@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1451064352 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
+1451090170 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/GameWindow.cpp
 	"GameWindow.h"
 	<iostream>
 	<GL/glew.h>
@@ -13,7 +13,7 @@
 1450979519 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/Game.h
 	<SDL2/SDL_keycode.h>
 
-1451064447 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
+1451127929 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.cpp
 	"GameWindow.h"
 	"SmithGame.h"
 	"scene/GameObject.h"
@@ -22,7 +22,7 @@
 	<memory>
 	<glm/gtx/transform.hpp>
 	"Time.h"
-	"rendering/Mesh.h"
+	"rendering/MeshRaw.h"
 	<iostream>
 
 1450979511 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/SmithGame.h
@@ -57,9 +57,9 @@
 	<GL/glew.h>
 	"../scene/GameObject.h"
 
-1450969353 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/game/TestComponent.h
 	"../scene/GameComponent.h"
-	"../rendering/Mesh.h"
+	"../rendering/MeshRaw.h"
 	<memory>
 	"../rendering/shaders/BasicShader.h"
 
@@ -77,16 +77,17 @@
 1450710968 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/scene/Scene.cpp
 	"Scene.h"
 
-1450969932 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
+1451089491 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.cpp
 	"Mesh.h"
 	<GL/glew.h>
 	<iostream>
 	<fstream>
 	<sstream>
 	<vector>
+	"MeshPlybinLoader.h"
 
-1450876142 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.h
-	<glm/glm.hpp>
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.h
+	"Vertex.h"
 	<string>
 	<GL/glew.h>
 
@@ -253,4 +254,45 @@
 	"Vertex.h"
 	<string>
 	<GL/glew.h>
+
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/MeshRaw.h
+	"Vertex.h"
+	<string>
+	<GL/glew.h>
+
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Vertex.h
+	<glm/glm.hpp>
+
+1451089401 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.cpp
+	"AssetSystem.h"
+
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.h
+	<vector>
+	"../rendering/Mesh.h"
+	<memory>
+	"MeshReference.h"
+
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.h
+
+1451089401 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.cpp
+	"MeshReference.h"
+	"AssetSystem.h"
+
+1451127909 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/MeshPlybinLoader.cpp
+	"MeshPlybinLoader.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/MeshPlybinLoader.h
+	<string>
+	"Vertex.h"
+
+1451127919 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/MeshRaw.cpp
+	"MeshRaw.h"
+	<GL/glew.h>
+	<iostream>
+	<vector>
+	"MeshPlybinLoader.h"
+	<SDL2/SDL.h>
 

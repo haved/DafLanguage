@@ -12,7 +12,6 @@ MeshRaw::MeshRaw(const std::string &filepath) : m_vbo(0), m_ibo(0), m_indexCount
 
     AllocateDataFromPlybin(filepath, &vertices, &vertexCount, &indices, &indexCount);
     LoadMeshData(vertices, vertexCount, indices, indexCount);
-
     delete[] vertices;
     delete[] indices;
 }
@@ -32,15 +31,14 @@ MeshRaw::~MeshRaw()
 	}
 }
 
+#include <SDL2/SDL.h>
 void MeshRaw::LoadMeshData(Vertex vertices[], uint32_t vertexCount, uint32_t indices[], uint32_t indexCount)
 {
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_ibo);
 
 	std::cout << "Allocated mesh with vbo: " << m_vbo << std::endl;
-
 	m_indexCount = indexCount;
-
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*vertexCount, vertices, GL_STATIC_DRAW);
 
