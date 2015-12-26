@@ -37,6 +37,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add library="SDL2" />
+			<Add library="GLEW" />
+			<Add library="GL" />
+		</Linker>
 		<Unit filename="src/Game.h" />
 		<Unit filename="src/GameWindow.cpp" />
 		<Unit filename="src/GameWindow.h" />
@@ -44,12 +49,21 @@
 		<Unit filename="src/SmithGame.h" />
 		<Unit filename="src/Time.cpp" />
 		<Unit filename="src/Time.h" />
+		<Unit filename="src/asset/AssetSystem.cpp" />
+		<Unit filename="src/asset/AssetSystem.h" />
+		<Unit filename="src/asset/MeshReference.cpp" />
+		<Unit filename="src/asset/MeshReference.h" />
 		<Unit filename="src/game/TestComponent.cpp" />
 		<Unit filename="src/game/TestComponent.h" />
 		<Unit filename="src/rendering/Mesh.cpp" />
 		<Unit filename="src/rendering/Mesh.h" />
+		<Unit filename="src/rendering/MeshPlybinLoader.cpp" />
+		<Unit filename="src/rendering/MeshPlybinLoader.h" />
+		<Unit filename="src/rendering/MeshRaw.cpp" />
+		<Unit filename="src/rendering/MeshRaw.h" />
 		<Unit filename="src/rendering/Shader.cpp" />
 		<Unit filename="src/rendering/Shader.h" />
+		<Unit filename="src/rendering/Vertex.h" />
 		<Unit filename="src/rendering/shaders/BasicShader.cpp" />
 		<Unit filename="src/rendering/shaders/BasicShader.h" />
 		<Unit filename="src/scene/GameComponent.h" />
