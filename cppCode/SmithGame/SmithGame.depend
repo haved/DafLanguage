@@ -108,3 +108,149 @@
 	<GL/glew.h>
 	<string>
 
+1451079133 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/game/TestComponent.cpp
+	"TestComponent.h"
+	"../Time.h"
+	<glm/gtx/transform.hpp>
+	<GL/glew.h>
+	"../scene/GameObject.h"
+
+1451088894 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/game/TestComponent.h
+	"../scene/GameComponent.h"
+	"../rendering/MeshRaw.h"
+	<memory>
+	"../rendering/shaders/BasicShader.h"
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/scene/GameComponent.h
+	<glm/glm.hpp>
+
+1451086965 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/Mesh.h
+	"Vertex.h"
+	<string>
+	<GL/glew.h>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/shaders/BasicShader.h
+	"../Shader.h"
+	<glm/glm.hpp>
+	<GL/glew.h>
+	<string>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/Shader.h
+	<GL/glew.h>
+	<string>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/Time.h
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/scene/GameObject.h
+	<vector>
+	<memory>
+	"GameComponent.h"
+	<glm/glm.hpp>
+
+1451081181 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/GameWindow.cpp
+	"GameWindow.h"
+	<iostream>
+	<GL/glew.h>
+	"Time.h"
+	<glm/glm.hpp>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/GameWindow.h
+	"Game.h"
+	<SDL2/SDL.h>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/Game.h
+	<SDL2/SDL_keycode.h>
+
+1451086958 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/Mesh.cpp
+	"Mesh.h"
+	<GL/glew.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	"MeshPlybinLoader.h"
+
+1451079133 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/Shader.cpp
+	"Shader.h"
+	<iostream>
+	<fstream>
+
+1451079133 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/shaders/BasicShader.cpp
+	"BasicShader.h"
+
+1451079133 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/scene/GameObject.cpp
+	"GameObject.h"
+	"Scene.h"
+	<algorithm>
+	<glm/gtx/transform.hpp>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/scene/Scene.h
+	"GameObject.h"
+	<memory>
+	<glm/common.hpp>
+
+1451079133 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/scene/Scene.cpp
+	"Scene.h"
+
+1451081357 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/SmithGame.cpp
+	"GameWindow.h"
+	"SmithGame.h"
+	"scene/GameObject.h"
+	"game/TestComponent.h"
+	<GL/glew.h>
+	<memory>
+	<glm/gtx/transform.hpp>
+	"Time.h"
+	"rendering/Mesh.h"
+	<iostream>
+
+1451079133 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/SmithGame.h
+	"Game.h"
+	"scene/Scene.h"
+	<glm/glm.hpp>
+
+1451079133 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/Time.cpp
+	"Time.h"
+	<SDL2/SDL.h>
+	<iostream>
+
+1451083583 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/asset/AssetSystem.cpp
+	"AssetSystem.h"
+
+1451083773 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/asset/AssetSystem.h
+	<vector>
+	"../rendering/Mesh.h"
+	<memory>
+	"MeshReference.h"
+
+1451083384 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/asset/MeshReference.cpp
+	"MeshReference.h"
+	"AssetSystem.h"
+
+1451083378 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/asset/MeshReference.h
+
+1451084346 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/Vertex.h
+	<glm/glm.hpp>
+
+1451087173 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/MeshPlybinLoader.h
+	<string>
+	"Vertex.h"
+
+1451087414 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/MeshPlybinLoader.cpp
+	"MeshPlybinLoader.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1451087483 source:/home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/MeshRaw.cpp
+	"MeshRaw.h"
+	<GL/glew.h>
+	<iostream>
+	<vector>
+	"MeshPlybinLoader.h"
+
+1451087186 /home/havard/Development/daf/DafLanguageGit/cppCode/SmithGame/src/rendering/MeshRaw.h
+	"Vertex.h"
+	<string>
+	<GL/glew.h>
+

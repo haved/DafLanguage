@@ -7,7 +7,7 @@
 #define  GLM_FORCE_RADIANS
 #include <glm/gtx/transform.hpp>
 #include "Time.h"
-#include "rendering/Mesh.h"
+#include "rendering/MeshRaw.h"
 #include <iostream>
 
 float FOV = 3.14159265f/2;
@@ -20,10 +20,10 @@ void SmithGame::Init() {
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene = new Scene();
     auto object = std::make_shared<GameObject>();
-    auto mesh = std::make_shared<Mesh>(RES_PATH+"mesh/cubeThing.plybin");
+    auto mesh = std::make_shared<MeshRaw>(RES_PATH+"mesh/cubeThing.plybin");
     auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader.vs", RES_PATH+"shader/BasicShader.fs");
     shader->LoadToGPU();
-    object->AddComponent(std::make_shared<TestComponent>(.8f, mesh,shader));
+    object->AddComponent(std::make_shared<TestComponent>(.8f,mesh,shader));
     scene->AddObject(object);
 }
 
@@ -32,7 +32,7 @@ void SmithGame::Destroy() {
 }
 
 void SmithGame::LoaderUpdate() {
-    std::cout << "Second thread!" << std::endl;
+
 }
 
 bool w,a,s,d,pause=true;

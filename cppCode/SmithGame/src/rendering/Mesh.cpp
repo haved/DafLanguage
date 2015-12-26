@@ -5,88 +5,56 @@
 #include <sstream>
 #include <vector>
 
-Mesh::Mesh(const std::string &filepath) {
-    std::ifstream file (filepath.c_str(), std::ios::in|std::ios::binary|std::ios::ate);
-    if(!file.is_open()) {
-        std::cerr << "Filed to open file " << filepath << "! Aborting!" << std::endl;
-        assert(false);
-    }
-    std::streampos memsize_pos = file.tellg();
-    uint32_t memsize = (uint32_t) memsize_pos;
-    file.seekg (0, std::ios::beg);
+#include "MeshPlybinLoader.h"
 
-    uint32_t header_mem[2];
-    uint32_t neededSize = sizeof(uint32_t)*2;
-    if(memsize < neededSize) {
-        std::cerr << "File " << filepath << " was less than 8 bytes long! Aborting!" << std::endl;
-        assert(false);
-    }
-    file.read ((char*)header_mem, sizeof(uint32_t)*2);
+Mesh::Mesh(const std::string &filepath) : m_loaded(false), m_filepath(filepath), m_vbo(0), m_ibo(0), m_indexCount(0) {
 
-    uint32_t vertexCount = header_mem[0];
-    uint32_t indexCount = header_mem[1]*3;
-
-    Vertex* vertices = new Vertex[vertexCount];
-    neededSize += sizeof(Vertex) * vertexCount;
-    if(memsize < neededSize) {
-        std::cerr << "File " << filepath << " was not long engough for " << vertexCount << " vertices! Aborting!" << std::endl;
-        assert(false);
-    }
-    file.read((char*)vertices, sizeof(Vertex)*vertexCount);
-
-    uint32_t* indices = new uint32_t[indexCount];
-    neededSize += sizeof(uint32_t) * indexCount;
-    if(memsize < neededSize) {
-        std::cerr << "File " << filepath << " was not long engough for " << indexCount << " indices! Aborting!" << std::endl;
-        assert(false);
-    }
-    file.read((char*)indices, sizeof(uint32_t)*indexCount);
-
-    if(memsize!=neededSize) {
-        std::clog << "Warning: The mesh file " << filepath << " was longer than specified in it's header! " << neededSize << "/" << memsize << std::endl;
-    }
-
-    file.close();
-
-    LoadMeshData(vertices, header_mem[0], indices, indexCount);
-
-    delete[] vertices;
-    delete[] indices;
-}
-
-Mesh::Mesh(Vertex vertices[], uint32_t vertexCount, uint32_t indices[], uint32_t indexCount)
-{
-	LoadMeshData(vertices, vertexCount, indices, indexCount);
 }
 
 Mesh::~Mesh()
 {
-	if (m_indicesCount != 0)
-	{
-        std::cout << "Deleted mesh with vbo: " << m_vbo << std::endl;
-		glDeleteBuffers(1, &m_vbo);
-		glDeleteBuffers(1, &m_ibo);
-	}
+	UnloadMesh();
 }
 
-void Mesh::LoadMeshData(Vertex vertices[], uint32_t vertexCount, uint32_t indices[], uint32_t indexCount)
-{
-	glGenBuffers(1, &m_vbo);
+void Mesh::LoadMesh() {
+    if(m_loaded)
+        return;
+
+    glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_ibo);
+    m_loaded = true;
 
-	std::cout << "Allocated mesh with vbo: " << m_vbo << std::endl;
+    std::cout << "Allocated mesh with vbo: " << m_vbo << std::endl;
 
-	m_indicesCount = indexCount;
+    Vertex* vertices;
+    uint32_t* indices;
+    uint32_t vertexCount;
+
+    AllocateDataFromPlybin(m_filepath, &vertices, &vertexCount, &indices, &m_indexCount);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*vertexCount, vertices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t)*indexCount, indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t)*m_indexCount, indices, GL_STATIC_DRAW);
+
+	delete[] vertices;
+	delete[] indices;
+}
+
+void Mesh::UnloadMesh() {
+    if(!m_loaded)
+        return;
+
+    std::cout << "Deleted mesh with vbo: " << m_vbo << std::endl;
+    glDeleteBuffers(1, &m_vbo);
+    glDeleteBuffers(1, &m_ibo);
 }
 
 void Mesh::Draw()
 {
+    if(!m_loaded)
+        return;
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
@@ -98,7 +66,7 @@ void Mesh::Draw()
 	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(glm::vec3)*2));
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, NULL);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
