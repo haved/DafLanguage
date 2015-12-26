@@ -86,7 +86,7 @@
 	<vector>
 	"MeshPlybinLoader.h"
 
-1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.h
+1451134038 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Mesh.h
 	"Vertex.h"
 	<string>
 	<GL/glew.h>
@@ -263,18 +263,19 @@
 1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/rendering/Vertex.h
 	<glm/glm.hpp>
 
-1451089401 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.cpp
+1451134529 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.cpp
 	"AssetSystem.h"
 
-1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.h
+1451134518 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/AssetSystem.h
 	<vector>
 	"../rendering/Mesh.h"
 	<memory>
 	"MeshReference.h"
 
-1451089401 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.h
+1451134603 /home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.h
+	<inttypes.h>
 
-1451089401 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.cpp
+1451134005 source:/home/havard/Development/DafLanguage/cppCode/SmithGame/src/asset/MeshReference.cpp
 	"MeshReference.h"
 	"AssetSystem.h"
 

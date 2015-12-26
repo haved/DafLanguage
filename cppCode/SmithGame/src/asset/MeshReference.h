@@ -1,14 +1,14 @@
 #pragma once
+#include <inttypes.h>
 
 class AssetSystem;
 
 class MeshReference  {
     public:
-        MeshReference(AssetSystem* assets, int meshId, int* countPtr);
+        MeshReference(AssetSystem* assets, uint32_t meshId);
         ~MeshReference();
         void Draw();
     private:
         AssetSystem* m_assets;
-        int m_meshId;
-        int* m_countPtr;
+        uint32_t m_meshId;
 };

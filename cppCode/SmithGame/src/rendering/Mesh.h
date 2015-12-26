@@ -12,6 +12,9 @@ public:
 	void LoadMesh();
     void UnloadMesh();
 	void Draw();
+	inline bool HasFilepath(const std::string& path) {
+        return m_filepath.compare(path)==0;
+	}
 private:
 	const std::string m_filepath;
 	bool m_loaded;

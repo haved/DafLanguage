@@ -1,17 +1,13 @@
 #include "MeshReference.h"
 #include "AssetSystem.h"
 
-MeshReference::MeshReference(AssetSystem* assets, int meshId, int* countPtr) : m_assets(assets), m_meshId(meshId), m_countPtr(countPtr) {
-    countPtr[0]++;
+MeshReference::MeshReference(AssetSystem* assets, uint32_t meshId) : m_assets(assets), m_meshId(meshId) {
 }
 
 MeshReference::~MeshReference() {
-    m_countPtr[0]--;
-    if(*m_countPtr<=0) {
-        delete m_countPtr;
-    }
+    m_assets->OnReferenceRemoved(m_meshId);
 }
 
-void MeshReference::Draw() {
-    m_assets->DrawMesh(m_meshId);
+inline void MeshReference::Draw() {
+    m_assets->GetLoadedMeshClass(m_meshId)->Draw();
 }
