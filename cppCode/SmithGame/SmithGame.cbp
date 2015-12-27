@@ -38,9 +38,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
+			<Add option="-lglfw3 -lm -lGL -lGLU" />
 			<Add library="SDL2" />
 			<Add library="GLEW" />
 			<Add library="GL" />
+			<Add directory="/home/havard/Development/glfw-3.1.2/src/" />
 		</Linker>
 		<Unit filename="src/Game.h" />
 		<Unit filename="src/GameWindow.cpp" />

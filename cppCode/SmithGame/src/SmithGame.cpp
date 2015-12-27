@@ -25,7 +25,6 @@ void SmithGame::Init() {
     auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader.vs", RES_PATH+"shader/BasicShader.fs");
     shader->LoadToGPU();
     object->AddComponent(std::make_shared<TestComponent>(.8f,assets->LoadMesh(mesh),shader));
-    assets->DoAllLoading();
     scene->AddObject(object);
 }
 
@@ -35,7 +34,7 @@ void SmithGame::Destroy() {
 }
 
 void SmithGame::LoaderUpdate() {
-    //assets->DoAllLoading();
+    assets->DoAllLoading();
 }
 
 bool w,a,s,d,pause=true;
@@ -56,48 +55,7 @@ void SmithGame::OnResize(int width, int height) {
     projectionMatrix = glm::perspectiveFov(FOV, (float)width, (float)height, 0.1f, 200.f);
 }
 
-void SmithGame::OnKeyPressed(SDL_Keycode code) {
-    switch(code) {
-        case SDLK_w: w=true; break;
-        case SDLK_a: a=true; break;
-        case SDLK_s: s=true; break;
-        case SDLK_d: d=true; break;
-        case SDLK_SPACE: pause=!pause; break;
-        default: break;
-    }
-    int x = 0;
-    int y = 0;
-    if(w)
-        y++;
-    if(a)
-        x--;
-    if(s)
-        y--;
-    if(d)
-        x++;
-    walkVector = glm::vec3(x, y, 0);
-}
-
-void SmithGame::OnKeyReleased(SDL_Keycode code) {
-    switch(code) {
-        case SDLK_w: w=false; break;
-        case SDLK_a: a=false; break;
-        case SDLK_s: s=false; break;
-        case SDLK_d: d=false; break;
-        default: break;
-    }
-    int x = 0;
-    int y = 0;
-    if(w)
-        y++;
-    if(a)
-        x--;
-    if(s)
-        y--;
-    if(d)
-        x++;
-    walkVector = glm::vec3(x, y, 0);
-}
+void SmithGame::OnKeyEvent(void) {}
 
 int main(int argc, char *argv[]) {
 	SmithGame game;

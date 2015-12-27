@@ -1,18 +1,20 @@
 #pragma once
 
 #include "Game.h"
-#include <SDL2/SDL.h>
+#include "GL/glew.h"
+#include <GLFW/glfw3.h>
 
 class GameWindow {
 public:
 	GameWindow(Game* game, const char* title, int width, int height, int samples, bool vsync);
 	int Run(int frameRate);
-	void UseRenderContext();
-	void UseThreadContext();
-	void SetToClose();
-	inline bool StayGoing() {
-        return m_stayGoing;
+	inline GLFWwindow* GetRenderContext() {
+        return m_renderWindow;
 	}
+	inline GLFWwindow* GetThreadContext() {
+        return m_threadWindow;
+	}
+	void SetToClose();
 	inline Game* GetGame() {
         return m_game;
 	}
@@ -22,8 +24,6 @@ private:
 	int m_width, m_height, m_samples;
 	bool m_vsync;
 
-	SDL_Window* m_window;
-	SDL_GLContext m_threadContext;
-	SDL_GLContext m_renderContext;
-	bool m_stayGoing;
+	GLFWwindow* m_renderWindow;
+	GLFWwindow* m_threadWindow;
 };

@@ -11,8 +11,7 @@ public:
 	void NextFrame();
 	void OnResize(int width, int height);
 	void Destroy();
-	void OnKeyPressed(SDL_Keycode code);
-	void OnKeyReleased(SDL_Keycode code);
+	void OnKeyEvent(void);
     void LoaderUpdate();
 private:
     Scene* scene;

@@ -53,6 +53,7 @@ void Mesh::UnloadMesh() {
 
 void Mesh::Draw()
 {
+    std::cout << "vbo: " << m_vbo << " loaded: " << m_loaded << std::endl;
     if(!m_loaded)
         return;
 	glEnableVertexAttribArray(0);
