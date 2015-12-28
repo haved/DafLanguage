@@ -38,6 +38,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
+<<<<<<< HEAD
+=======
+			<Add option="-lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi" />
+>>>>>>> 3d0b35114cc4275849b200aa9c7047349f95b0e3
 			<Add library="SDL2" />
 			<Add library="GLEW" />
 			<Add library="GL" />
@@ -75,6 +79,7 @@
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
