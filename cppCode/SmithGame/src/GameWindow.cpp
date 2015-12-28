@@ -60,7 +60,7 @@ int GameWindow::Run(int frameRate) {
 	}
     const GLFWvidmode* vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor()); //Center the renderWindow on the screen
     glfwSetWindowPos(m_renderWindow, (vidmode->width-m_width)/2, (vidmode->height-m_height)/2);
-    m_threadWindow = glfwCreateWindow(0, 0, "ThreadWindow", NULL, m_renderWindow);
+    m_threadWindow = glfwCreateWindow(80, 60, "ThreadWindow", NULL, m_renderWindow);
     if (!m_threadWindow) {
 		std::cerr << "GLFW thread window creation failed!" << std::endl;
 		glfwDestroyWindow(m_renderWindow);

@@ -1,0 +1,25 @@
+28.12.2015
+23:09
+
+I make the directory build. (You may call it anything)
+Then I cd into the new directory and run the following command:
+
+cmake .. -G"CodeBlocks - Unix Makefiles"
+
+There should be a CMakeLists.txt in the parent folder. Cmake reads it and makes a makefile, a code::blocks project and some other files in the build directory.
+Open the project in code::blocks and choose the name of your target as build target. You may now buld, run and edit your source code from code::blocks.
+
+I'm not sure how adding new files from code::blocks will go. You probably have to re-run cmake (with all the code::blocks stuff). Having a clean build folder is often not necessary.
+If you add folders or need libraries or other funky things, you can edit the cmake file to fit. You can run cmake and make without code::blocks first to make sure it compiles, then use code::blocks to edit source code.
+When just editing source, no changes to the CMakeLists.txt are needed. If you move the project, you have to run cmake again. I'm not sure what the other build targets in the code::blocks project do.
+
+The reason this isn't on git is that cmake has to be run every time the project path changes, which goes badly on different systems. /**/build/ is in the .gitignore
+
+Note: The executable is made in the build folder. You don't need to run cmake from a folder, but it's easier to clean, and more importantly, filepaths relative to the program don't need to change. "../res/" should always be the path from the program to the res folder.
+:w //I'm leaving this for the future ;)
+
+//End of transmission (this is just for fun)
+28.12.2015
+23:24
+
+
