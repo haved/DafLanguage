@@ -11,3 +11,7 @@ MeshReference::~MeshReference() {
 void MeshReference::Draw() {
     m_assets->GetLoadedMeshClass(m_meshId)->Draw();
 }
+
+inline bool MeshReference::Loaded() {
+    return m_assets->GetLoadedMeshClass(m_meshId)->Loaded();
+}

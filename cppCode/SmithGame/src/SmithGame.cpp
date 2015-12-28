@@ -13,7 +13,7 @@
 float FOV = 3.14159265f/2;
 float TAU = 3.14159265f*2;
 
-std::string SmithGame::RES_PATH="./res/";
+std::string SmithGame::RES_PATH="../res/";
 
 void SmithGame::Init() {
     glEnable(GL_DEPTH_TEST);
@@ -34,13 +34,15 @@ void SmithGame::Destroy() {
 }
 
 void SmithGame::LoaderUpdate() {
-    assets->DoAllLoading();
+    //assets->DoAllLoading();
 }
 
 bool w,a,s,d,pause=true;
 glm::vec3 walkVector;
 glm::vec3 camPos(0, 0, 10);
 glm::vec3 camTarget(0, 0, 0);
+
+int count=0;
 void SmithGame::NextFrame() {
     camPos += walkVector*(GetDeltaTime()*30);
     if(!pause)
@@ -48,6 +50,10 @@ void SmithGame::NextFrame() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glm::mat4 view = glm::lookAt(camPos, camTarget, glm::vec3(0, 1, 0));
     scene->Render(projectionMatrix*view);
+    if(count<200)
+        count++;
+    else
+        assets->DoAllLoading();
 }
 
 void SmithGame::OnResize(int width, int height) {
