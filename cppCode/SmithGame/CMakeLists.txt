@@ -40,12 +40,11 @@ add_executable(SmithGame ${MySources} ${MySourcesGame} ${MySourcesScene} ${MySou
 
 target_include_directories(SmithGame PUBLIC "${CMAKE_SOURCE_DIR}/src")
 
-target_link_libraries(SmithGame "SDL2")
-target_link_libraries(SmithGame "GLEW")
-target_link_libraries(SmithGame "GL")
-
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
 include_directories(${GLFW_INCLUDE_DIRS})
-target_link_libraries(SmithGame ${GLFW_LIBRARIES})
+target_link_libraries(SmithGame ${GLFW_STATIC_LIBRARIES})
+
+target_link_libraries(SmithGame "SDL2")
+target_link_libraries(SmithGame "GLEW")
 
