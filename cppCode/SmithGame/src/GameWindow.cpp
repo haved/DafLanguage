@@ -77,6 +77,7 @@ int GameWindow::Run(int frameRate) {
 	}
 
     //====================================================================GAME INIT and LOOP
+    glfwMakeContextCurrent(m_renderWindow);
 	m_game->Init();
 	m_game->OnResize(m_width, m_height);
     SDL_Thread* loaderThread = SDL_CreateThread(loadThread, "SmithGame_Loader_thread", (void*)this);//Making thread
@@ -97,6 +98,6 @@ int GameWindow::Run(int frameRate) {
 	glfwDestroyWindow(m_renderWindow);
     glfwTerminate();
 	SDL_Quit();
-
+    std::cout << "Program end" << std::endl;
 	return 0;
 }

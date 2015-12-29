@@ -3,6 +3,7 @@
 #include "Vertex.h"
 #include <string>
 #include <GL/glew.h>
+#include <iostream>
 
 class Mesh
 {
@@ -16,6 +17,7 @@ public:
         return m_filepath.compare(path)==0;
 	}
 	inline bool Loaded() {
+        std::cout << m_indexCount << std::endl;
         return m_loaded;
 	}
 private:

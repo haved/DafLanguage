@@ -15,8 +15,10 @@ void TestComponent::Update() {
     this->parent->GetMutRotPointer()->z+=GetDeltaTime()*m_speed;
 }
 
+#include <iostream>
 glm::vec4 white(1,1,1,1);
 void TestComponent::Render(const glm::mat4 &MVP) {
+    std::cout << "Mesh loaded? " << m_mesh->Loaded() << std::endl;
     m_shader->Bind();
     m_shader->SetMVP(MVP);
     m_shader->SetModelspaceMatrix(parent->GetGlobalModelspace());

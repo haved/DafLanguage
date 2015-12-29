@@ -49,6 +49,8 @@ void Mesh::UnloadMesh() {
     std::cout << "Deleted mesh with vbo: " << m_vbo << std::endl;
     glDeleteBuffers(1, &m_vbo);
     glDeleteBuffers(1, &m_ibo);
+
+    m_loaded=false;
 }
 
 void Mesh::Draw()
