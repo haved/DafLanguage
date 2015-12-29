@@ -68,8 +68,12 @@ int GameWindow::Run(int frameRate) {
 		exit(EXIT_FAILURE);
 	}
     //====================================================================INIT of GLEW
-	if(glewInit() != GLEW_OK) {
-		std::cerr << "Failed to initialize GLEW!" << std::endl;
+    glfwMakeContextCurrent(m_renderWindow);
+
+    glewExperimental=true;
+    GLenum err = glewInit();
+	if(err!=GLEW_OK) {
+		std::cerr << "Failed to initialize GLEW!" << glewGetErrorString(err) << std::endl;
 		glfwDestroyWindow(m_threadWindow);
 		glfwDestroyWindow(m_renderWindow);
 		glfwTerminate();
@@ -77,16 +81,27 @@ int GameWindow::Run(int frameRate) {
 	}
 
     //====================================================================GAME INIT and LOOP
-    glfwMakeContextCurrent(m_renderWindow);
 	m_game->Init();
 	m_game->OnResize(m_width, m_height);
     SDL_Thread* loaderThread = SDL_CreateThread(loadThread, "SmithGame_Loader_thread", (void*)this);//Making thread
     glfwShowWindow(m_renderWindow);
+    uint32_t startMs = SDL_GetTicks();
+    uint32_t framesAgo = 0;
+    float msPerFrame = 1000.f/frameRate;
 	while (!glfwWindowShouldClose(m_renderWindow)) {
         UpdateDeltaTime();
 		m_game->NextFrame();
 		glfwSwapBuffers(m_renderWindow);
 		glfwPollEvents();
+        framesAgo++;
+        uint32_t wantedTime = startMs+((uint32_t)(framesAgo*msPerFrame));
+        uint32_t currentTime = SDL_GetTicks();
+        if(wantedTime>currentTime)
+            SDL_Delay(wantedTime-currentTime);
+        if(framesAgo>=frameRate) {
+            framesAgo=0;
+            startMs+=1000;
+        }
 	}
 	//====================================================================TELL and wait for the loading thread to stop,
     glfwSetWindowShouldClose(m_threadWindow, GL_TRUE);

@@ -3,6 +3,7 @@
 #include "scene/Scene.h"
 #include <glm/glm.hpp>
 #include "asset/AssetSystem.h"
+#include "FPSCounter.h"
 
 class SmithGame : public Game {
 public:
@@ -17,4 +18,5 @@ private:
     Scene* scene;
     AssetSystem* assets;
     glm::mat4 projectionMatrix;
+    FPSCounter m_fpsCounter;
 };
