@@ -9,7 +9,7 @@ cmake .. -G"CodeBlocks - Unix Makefiles"
 There should be a CMakeLists.txt in the parent folder. Cmake reads it and makes a makefile, a code::blocks project and some other files in the build directory.
 Open the project in code::blocks and choose the name of your target as build target. You may now buld, run and edit your source code from code::blocks.
 
-I'm not sure how adding new files from code::blocks will go. You probably have to re-run cmake (with all the code::blocks stuff). Having a clean build folder is often not necessary.
+I'm not sure how adding new files from code::blocks will go. (EDIT 30.12.15 22:50 It would seem code::blocks runs cmake again either way, so just try) You probably have to re-run cmake (with all the code::blocks stuff). Having a clean build folder is often not necessary.
 If you add folders or need libraries or other funky things, you can edit the cmake file to fit. You can run cmake and make without code::blocks first to make sure it compiles, then use code::blocks to edit source code.
 When just editing source, no changes to the CMakeLists.txt are needed. If you move the project, you have to run cmake again. I'm not sure what the other build targets in the code::blocks project do.
 EDIT(23:45, same day): The rebuild_cache target runs cmake for you. Then code::blocks prompts you to reload the project file. You might still have to do cmake manually if you for instance move the project directory.
