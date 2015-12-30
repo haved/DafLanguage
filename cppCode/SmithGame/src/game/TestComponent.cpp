@@ -4,6 +4,8 @@
 #include <glm/gtx/transform.hpp>
 #include <GL/glew.h>
 #include "../scene/GameObject.h"
+#include <glm/glm.hpp>
+#include "../common.h"
 
 void TestComponent::SetParent(GameObject* parent) {
     this->parent = parent;
@@ -12,7 +14,10 @@ void TestComponent::SetParent(GameObject* parent) {
 }
 
 void TestComponent::Update() {
-    this->parent->GetMutRotPointer()->z+=GetDeltaTime()*m_speed;
+    glm::vec3* mutRot = parent->GetMutRotPointer();
+    mutRot->z+=GetDeltaTime()*m_speed;
+    mutRot->x+=glm::cos(GetIngameSeconds()/4)/30*m_speed;
+    mutRot->y=glm::sin(GetIngameSeconds()/7*m_speed)*TAU;
 }
 
 #include <iostream>

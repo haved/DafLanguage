@@ -1,7 +1,13 @@
 #pragma once
 
-void UpdateDeltaTime();
+#include <stdint.h>
 
-float GetDeltaTime();
-long GetDeltaMillis();
-long GetCurrentMillis();
+void UpdateDeltaTime();
+void UpdateIngameTime();
+
+float    GetDeltaTime();
+uint32_t GetDeltaMillis();
+uint32_t GetCurrentMillis();
+float    GetCurrentSeconds();
+uint32_t GetIngameMillis();
+float    GetIngameSeconds();

@@ -12,7 +12,7 @@ public:
 	void NextFrame();
 	void OnResize(int width, int height);
 	void Destroy();
-	void OnKeyEvent(void);
+	void OnKeyEvent(int key, int action);
     void LoaderUpdate();
 private:
     Scene* scene;

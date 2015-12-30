@@ -23,7 +23,6 @@ int loadThread(void* arg) {
     glfwMakeContextCurrent(threadContext);
     Game* game = gameWindow->GetGame();
 
-    SDL_Delay(1000);
     while(!glfwWindowShouldClose(threadContext)) {
         game->LoaderUpdate();
         SDL_Delay(10);
@@ -39,6 +38,10 @@ void error_callback(int error, const char* description) {
 
 void window_resize_callback(GLFWwindow* window, int width, int height) {
     GameWindow::instance->GetGame()->OnResize(width, height);
+}
+
+void window_keyevent_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    GameWindow::instance->GetGame()->OnKeyEvent(key, action);
 }
 
 int GameWindow::Run(uint32_t frameRate) {
@@ -69,7 +72,8 @@ int GameWindow::Run(uint32_t frameRate) {
     glfwSetWindowPos(m_renderWindow, (vidmode->width-m_width)/2, (vidmode->height-m_height)/2);
     //=====================================Render window callbacks
     glfwSetWindowSizeCallback(m_renderWindow, window_resize_callback);
-
+    glfwSetKeyCallback(m_renderWindow, window_keyevent_callback);
+    //=====================================Thread window
     m_threadWindow = glfwCreateWindow(80, 60, "ThreadWindow", NULL, m_renderWindow);
     if (!m_threadWindow) {
 		std::cerr << "GLFW thread window creation failed!" << std::endl;

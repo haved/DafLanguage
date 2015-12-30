@@ -7,32 +7,32 @@ if(UNIX)
 endif()
 
 file(GLOB MySources
-	#src/*.h
+	src/*.h
 	src/*.cpp
 )
 
 file(GLOB MySourcesGame
-	#src/game/*.h
+	src/game/*.h
 	src/game/*.cpp
 )
 
 file(GLOB MySourcesScene
-	#src/scene/*.h
+	src/scene/*.h
 	src/scene/*.cpp
 )
 
 file(GLOB MySourcesAsset
-	#src/asset/*.h
+	src/asset/*.h
 	src/asset/*.cpp
 )
 
 file(GLOB MySourcesRendering
-	#src/rendering/*.h
+	src/rendering/*.h
 	src/rendering/*.cpp
 )
 
 file(GLOB MySourcesRenderingShaders
-	#src/rendering/shaders/*.h
+	src/rendering/shaders/*.h
 	src/rendering/shaders/*.cpp
 )
 
