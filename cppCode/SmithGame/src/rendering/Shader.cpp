@@ -82,7 +82,7 @@ GLuint Shader::CreateShader(const std::string& text, unsigned int type)
 	glShaderSource(shader, 1, p, lengths);
 	glCompileShader(shader);
 
-	CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!");
+	CheckShaderError(shader, GL_COMPILE_STATUS, false, type==GL_VERTEX_SHADER?"Error compiling vertex shader!":"Error compiling fragment shader!");
 
 	return shader;
 }

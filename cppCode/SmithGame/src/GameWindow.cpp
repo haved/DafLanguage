@@ -4,8 +4,11 @@
 #include <glm/glm.hpp>
 #include <SDL2/SDL.h>
 
-GameWindow::GameWindow(Game * game, const char* title, int width, int height, int samples, bool vsync)
+GameWindow* GameWindow::instance=NULL;
+
+GameWindow::GameWindow(Game* game, const char* title, int width, int height, int samples, bool vsync)
 {
+    GameWindow::instance=this;
 	m_game = game;
 	m_title = title;
 	m_width = width;
@@ -15,7 +18,7 @@ GameWindow::GameWindow(Game * game, const char* title, int width, int height, in
 }
 
 int loadThread(void* arg) {
-    GameWindow* gameWindow = (GameWindow*) arg;
+    GameWindow* gameWindow = GameWindow::instance;
     GLFWwindow* threadContext = gameWindow->GetThreadContext();
     glfwMakeContextCurrent(threadContext);
     Game* game = gameWindow->GetGame();
@@ -34,7 +37,11 @@ void error_callback(int error, const char* description) {
     puts(description);
 }
 
-int GameWindow::Run(int frameRate) {
+void window_resize_callback(GLFWwindow* window, int width, int height) {
+    GameWindow::instance->GetGame()->OnResize(width, height);
+}
+
+int GameWindow::Run(uint32_t frameRate) {
 	std::cout << "Running application!" << std::endl;
 
     //====================================================================INIT of SDL and GLFW
@@ -47,7 +54,7 @@ int GameWindow::Run(int frameRate) {
         std::cerr << "GLFW failed to init! Aborting!" << std::endl;
         exit(EXIT_FAILURE);
     }
-    //====================================================================GLFW window creation
+    //====================================================================GLFW render window window creation
 	glfwDefaultWindowHints();
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
     glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
@@ -60,6 +67,9 @@ int GameWindow::Run(int frameRate) {
 	}
     const GLFWvidmode* vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor()); //Center the renderWindow on the screen
     glfwSetWindowPos(m_renderWindow, (vidmode->width-m_width)/2, (vidmode->height-m_height)/2);
+    //=====================================Render window callbacks
+    glfwSetWindowSizeCallback(m_renderWindow, window_resize_callback);
+
     m_threadWindow = glfwCreateWindow(80, 60, "ThreadWindow", NULL, m_renderWindow);
     if (!m_threadWindow) {
 		std::cerr << "GLFW thread window creation failed!" << std::endl;
@@ -83,7 +93,7 @@ int GameWindow::Run(int frameRate) {
     //====================================================================GAME INIT and LOOP
 	m_game->Init();
 	m_game->OnResize(m_width, m_height);
-    SDL_Thread* loaderThread = SDL_CreateThread(loadThread, "SmithGame_Loader_thread", (void*)this);//Making thread
+    SDL_Thread* loaderThread = SDL_CreateThread(loadThread, "SmithGame_Loader_thread", NULL);//Making thread
     glfwShowWindow(m_renderWindow);
     uint32_t startMs = SDL_GetTicks();
     uint32_t framesAgo = 0;

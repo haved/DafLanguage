@@ -6,8 +6,9 @@
 
 class GameWindow {
 public:
+    static GameWindow* instance;
 	GameWindow(Game* game, const char* title, int width, int height, int samples, bool vsync);
-	int Run(int frameRate);
+	int Run(uint32_t frameRate);
 	inline GLFWwindow* GetRenderContext() {
         return m_renderWindow;
 	}

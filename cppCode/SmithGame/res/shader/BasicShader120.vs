@@ -1,15 +1,15 @@
 #version 120
 
-layout(location = 0) in vec3 vertexPosition_modelspace;
-layout(location = 1) in vec3 vertexNormal;
-layout(location = 2) in vec3 vertexColor;
+attribute vec3 vertexPosition_modelspace;
+attribute vec3 vertexNormal;
+attribute vec3 vertexColor;
 
 uniform mat4 modelspaceMatrix;
 uniform mat4 MVP;
 uniform vec4 color;
 
-out vec4 vertexColor0;
-out vec3 vertexNormal0;
+varying vec4 vertexColor0;
+varying vec3 vertexNormal0;
 
 void main()
 {
