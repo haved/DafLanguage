@@ -17,37 +17,17 @@ std::string SmithGame::RES_PATH="../res/";
 
 void SmithGame::Init() {
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene  = new Scene();
     assets = new AssetSystem();
-    int mesh = assets->AddMeshAsset(RES_PATH+"mesh/cubeThing.plybin");
+    int mesh = assets->AddMeshAsset(RES_PATH+"mesh/Terrain.plybin");
     auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader120.vs", RES_PATH+"shader/BasicShader120.fs");
     shader->LoadToGPU();
 
-    auto prevObject = std::make_shared<GameObject>();
-    glm::vec3* scale = prevObject->GetMutScalePointer();
-    scale->x=0.2f;
-    scale->y=0.2f;
-    scale->z=0.2f;
-    scene->AddObject(prevObject);
-    for(int i = 0; i<40; i++) {
-        auto newObject=std::make_shared<GameObject>();
-        newObject->AddComponent(std::make_shared<TestComponent>(.5f, assets->LoadMesh(mesh), shader));
-        glm::vec3* posPointer = newObject->GetMutPosPointer();
-        posPointer->z=4;
-        posPointer->x=1;
-        posPointer->y=-1;
-        prevObject->AddChild(newObject);
-        prevObject=newObject;
-    }
-
-    /*auto object = std::make_shared<GameObject>();
-    object->AddComponent(std::make_shared<TestComponent>(.2f,assets->LoadMesh(mesh),shader));
-    auto object2 = std::make_shared<GameObject>();
-    object2->AddComponent(std::make_shared<TestComponent>(.8f, assets->LoadMesh(mesh), shader));
-
-    object->AddChild(object2);
-    scene->AddObject(object);*/
+    auto terrainObject=std::make_shared<GameObject>();
+    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(mesh), shader));
+    scene->AddObject(terrainObject);
 }
 
 void SmithGame::Destroy() {
@@ -65,7 +45,8 @@ glm::vec3 camPos(0, 0, 10);
 glm::vec3 camTarget(0, 0, 0);
 
 void SmithGame::NextFrame() {
-    camPos += walkVector*(GetDeltaTime()*30);
+    camTarget += walkVector*(GetDeltaTime()*8);
+    camPos=camTarget+glm::vec3(0, -4, 10);
     if(!pause) {
         UpdateIngameTime();
         scene->Update();
@@ -82,6 +63,8 @@ void SmithGame::OnResize(int width, int height) {
 }
 
 void SmithGame::OnKeyEvent(int key, int action) {
+    if(action!=GLFW_PRESS & action!=GLFW_RELEASE)
+        return;
     if(key==GLFW_KEY_W)
         w=action==GLFW_PRESS;
     else if(key==GLFW_KEY_A)
@@ -92,6 +75,8 @@ void SmithGame::OnKeyEvent(int key, int action) {
         d=action==GLFW_PRESS;
     else if((key==GLFW_KEY_SPACE) & (action==GLFW_PRESS))
         pause=!pause;
+
+    walkVector=glm::vec3(a?-1:(d?1:0),w?1:(s?-1:0),0);
 }
 
 int main(int argc, char *argv[]) {
