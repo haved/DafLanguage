@@ -26,3 +26,5 @@ private:
 	GLuint m_ibo;
 	uint32_t m_indexCount;
 };
+
+inline void DrawMesh(GLuint vbo, GLuint ibo, uint32_t indexCount);

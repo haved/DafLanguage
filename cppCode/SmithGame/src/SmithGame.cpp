@@ -21,13 +21,19 @@ void SmithGame::Init() {
     glClearColor(0.3f, 0.5f, 0.9f, 1);
     scene  = new Scene();
     assets = new AssetSystem();
-    int mesh = assets->AddMeshAsset(RES_PATH+"mesh/Terrain.plybin");
-    auto shader = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader120.vs", RES_PATH+"shader/BasicShader120.fs");
+    int terrainMesh = assets->AddMeshAsset(RES_PATH+"mesh/Terrain.plybin11");
+    int treeMesh    = assets->AddMeshAsset(RES_PATH+"mesh/Tree9.plybin11");
+    auto shader     = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader120.vs", RES_PATH+"shader/BasicShader120.fs");
     shader->LoadToGPU();
 
     auto terrainObject=std::make_shared<GameObject>();
-    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(mesh), shader));
+    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(terrainMesh), shader));
     scene->AddObject(terrainObject);
+
+    auto treeObject = std::make_shared<GameObject>();
+    treeObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(treeMesh), shader));
+    treeObject->GetMutPosPointer()->z=1;
+    scene->AddObject(treeObject);
 }
 
 void SmithGame::Destroy() {
@@ -63,7 +69,7 @@ void SmithGame::OnResize(int width, int height) {
 }
 
 void SmithGame::OnKeyEvent(int key, int action) {
-    if(action!=GLFW_PRESS & action!=GLFW_RELEASE)
+    if((action!=GLFW_PRESS) & (action!=GLFW_RELEASE))
         return;
     if(key==GLFW_KEY_W)
         w=action==GLFW_PRESS;

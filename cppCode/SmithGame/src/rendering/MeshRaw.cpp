@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "MeshPlybinLoader.h"
+#include "Mesh.h"
 
 MeshRaw::MeshRaw(const std::string &filepath) : m_vbo(0), m_ibo(0), m_indexCount(0) {
     Vertex* vertices;
@@ -31,7 +32,6 @@ MeshRaw::~MeshRaw()
 	}
 }
 
-#include <SDL2/SDL.h>
 void MeshRaw::LoadMeshData(Vertex vertices[], uint32_t vertexCount, uint32_t indices[], uint32_t indexCount)
 {
 	glGenBuffers(1, &m_vbo);
@@ -48,20 +48,5 @@ void MeshRaw::LoadMeshData(Vertex vertices[], uint32_t vertexCount, uint32_t ind
 
 void MeshRaw::Draw()
 {
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), NULL);
-	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)sizeof(glm::vec3));
-	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(glm::vec3)*2));
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, NULL);
-
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
+	DrawMesh(m_vbo, m_ibo, m_indexCount);
 }

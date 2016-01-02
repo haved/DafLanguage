@@ -53,24 +53,31 @@ void Mesh::UnloadMesh() {
     m_loaded=false;
 }
 
-void Mesh::Draw()
-{
+void Mesh::Draw() {
     if(!m_loaded)
         return;
+    DrawMesh(m_vbo, m_ibo, m_indexCount);
+}
+
+inline void DrawMesh(GLuint vbo, GLuint ibo, uint32_t indexCount)
+{
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(3);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), NULL);
-	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)sizeof(glm::vec3));
-	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(glm::vec3)*2));
+	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(float)*3));
+	glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(float)*6));
+	glVertexAttribPointer(3, 3, GL_FLOAT, false, sizeof(Vertex), (void*)(sizeof(float)*8));
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
+	glDisableVertexAttribArray(3);
 }
