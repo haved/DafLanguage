@@ -7,6 +7,9 @@
 #include <glm/glm.hpp>
 #include "../common.h"
 
+TestComponent::TestComponent(float speed, std::shared_ptr<MeshReference> mesh, std::shared_ptr<TextureRaw> texture, std::shared_ptr<BasicShader> shader)
+: m_speed(speed), m_mesh(mesh), m_texture(texture), m_shader(shader) {}
+
 void TestComponent::SetParent(GameObject* parent) {
     this->parent = parent;
     if(parent!=NULL)
@@ -27,5 +30,9 @@ void TestComponent::Render(const glm::mat4 &MVP) {
     m_shader->SetMVP(MVP);
     m_shader->SetModelspaceMatrix(parent->GetGlobalModelspace());
     m_shader->SetColor(white);
+    if(m_texture)
+        m_texture->Bind();
+    else
+        UseNoTexture();
     m_mesh->Draw();
 }

@@ -7,6 +7,7 @@ void BasicShader::LoadToGPU() {
         m_modelspaceMatrix_id = m_shader.GetUniformLocation("modelspaceMatrix");
         m_MVP_id = m_shader.GetUniformLocation("MVP");
         m_color_id = m_shader.GetUniformLocation("color");
+        glUniform1i(m_shader.GetUniformLocation("diffuse"), 0); //Set diffuse to sampler 0
     }
 }
 

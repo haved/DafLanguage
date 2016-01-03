@@ -7,7 +7,7 @@
 #define  GLM_FORCE_RADIANS
 #include <glm/gtx/transform.hpp>
 #include "Time.h"
-#include "rendering/MeshRaw.h"
+#include "rendering/TextureRaw.h"
 #include <iostream>
 #include "common.h"
 
@@ -23,16 +23,21 @@ void SmithGame::Init() {
     assets = new AssetSystem();
     int terrainMesh = assets->AddMeshAsset(RES_PATH+"mesh/Terrain.plybin11");
     int treeMesh    = assets->AddMeshAsset(RES_PATH+"mesh/Tree9.plybin11");
+
+    auto treeTexture = std::make_shared<TextureRaw>(RES_PATH+"texture/Tree9.png");
+    auto whiteTexture = std::make_shared<TextureRaw>();
+
     auto shader     = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader120.vs", RES_PATH+"shader/BasicShader120.fs");
     shader->LoadToGPU();
 
     auto terrainObject=std::make_shared<GameObject>();
-    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(terrainMesh), shader));
+    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(terrainMesh), whiteTexture, shader));
     scene->AddObject(terrainObject);
 
     auto treeObject = std::make_shared<GameObject>();
-    treeObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(treeMesh), shader));
-    treeObject->GetMutPosPointer()->z=1;
+    treeObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(treeMesh), treeTexture, shader));
+    treeObject->GetMutPosPointer()->z=0.2f;
+    treeObject->GetMutRotPointer()->z=PI/2;
     scene->AddObject(treeObject);
 }
 

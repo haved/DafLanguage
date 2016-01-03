@@ -103,10 +103,13 @@ int GameWindow::Run(uint32_t frameRate) {
     uint32_t framesAgo = 0;
     float msPerFrame = 1000.f/frameRate;
 	while (!glfwWindowShouldClose(m_renderWindow)) {
+        glfwMakeContextCurrent(m_renderWindow);
         UpdateDeltaTime();
 		m_game->NextFrame();
 		glfwSwapBuffers(m_renderWindow);
 		glfwPollEvents();
+
+
         framesAgo++;
         uint32_t wantedTime = startMs+((uint32_t)(framesAgo*msPerFrame));
         uint32_t currentTime = SDL_GetTicks();
