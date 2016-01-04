@@ -20,26 +20,8 @@ void Mesh::LoadMesh() {
     if(m_loaded)
         return;
 
-    glGenBuffers(1, &m_vbo);
-	glGenBuffers(1, &m_ibo);
-    m_loaded = true;
-
-    std::cout << "Allocated mesh with vbo: " << m_vbo << std::endl;
-
-    Vertex* vertices;
-    uint32_t* indices;
-    uint32_t vertexCount;
-
-    AllocateDataFromPlybin(m_filepath, &vertices, &vertexCount, &indices, &m_indexCount);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*vertexCount, vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t)*m_indexCount, indices, GL_STATIC_DRAW);
-
-	delete[] vertices;
-	delete[] indices;
+    AllocateGLMeshFromPlybin(m_filepath, &m_vbo, &m_ibo, &m_indexCount);
+    m_loaded=true;
 }
 
 void Mesh::UnloadMesh() {

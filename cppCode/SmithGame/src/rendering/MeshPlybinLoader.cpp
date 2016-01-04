@@ -47,3 +47,24 @@ void AllocateDataFromPlybin(const std::string& filepath, Vertex** vertices, uint
     file.close();
 }
 
+void AllocateGLMeshFromPlybin(const std::string& filepath, GLuint* vbo, GLuint* ibo, uint32_t* indexCount) {
+    Vertex* vertices;
+    uint32_t* indices;
+    uint32_t vertexCount;
+
+    AllocateDataFromPlybin(filepath, &vertices, &vertexCount, &indices, indexCount);
+
+    glGenBuffers(1, vbo);
+	glGenBuffers(1, ibo);
+
+	std::cout << "Allocated mesh with vbo: " << *vbo << std::endl;
+	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*vertexCount, vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t)*(*indexCount), indices, GL_STATIC_DRAW);
+
+	delete[] vertices;
+	delete[] indices;
+}
+
