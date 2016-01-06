@@ -23,19 +23,17 @@ void SmithGame::Init() {
     assets = new AssetSystem();
     int terrainMesh = assets->AddMeshAsset(RES_PATH+"mesh/Terrain.plybin11");
     int treeMesh    = assets->AddMeshAsset(RES_PATH+"mesh/Tree9.plybin11");
+    int treeTexture = assets->AddTextureAsset(RES_PATH+"texture/Tree9.png");
 
-    auto treeTexture = std::make_shared<TextureRaw>(RES_PATH+"texture/Tree9.png");
-    auto whiteTexture = std::make_shared<TextureRaw>();
-
-    auto shader     = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader120.vs", RES_PATH+"shader/BasicShader120.fs");
+    auto shader       = std::make_shared<BasicShader>(RES_PATH+"shader/BasicShader120.vs", RES_PATH+"shader/BasicShader120.fs");
     shader->LoadToGPU();
 
     auto terrainObject=std::make_shared<GameObject>();
-    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(terrainMesh), whiteTexture, shader));
+    terrainObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(terrainMesh), assets->LoadTexture(treeTexture), shader));
     scene->AddObject(terrainObject);
 
     auto treeObject = std::make_shared<GameObject>();
-    treeObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(treeMesh), treeTexture, shader));
+    treeObject->AddComponent(std::make_shared<TestComponent>(0, assets->LoadMesh(treeMesh), assets->NullTexture(), shader));
     treeObject->GetMutPosPointer()->z=0.2f;
     treeObject->GetMutRotPointer()->z=PI/2;
     scene->AddObject(treeObject);

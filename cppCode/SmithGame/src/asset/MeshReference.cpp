@@ -5,7 +5,7 @@ MeshReference::MeshReference(AssetSystem* assets, uint32_t meshId) : m_assets(as
 }
 
 MeshReference::~MeshReference() {
-    m_assets->OnReferenceRemoved(m_meshId);
+    m_assets->OnMeshReferenceRemoved(m_meshId);
 }
 
 void MeshReference::Draw() {

@@ -6,11 +6,12 @@
 class Texture {
 public:
     Texture(const std::string& filepath);
+    Texture();
     ~Texture();
     void LoadTexture();
     void UnloadTexture();
     void Bind();
-    inline bool HasPath(const std::string& filepath) {
+    inline bool HasFilepath(const std::string& filepath) {
         return m_filepath.compare(filepath) == 0;
     }
     inline bool Loaded() {
@@ -21,4 +22,4 @@ private:
     GLuint m_texture;
 };
 
-void LoadFromImage(const std::string& filepath, GLuint& address);
+void LoadFromImage(const std::string& filepath, GLuint* address);

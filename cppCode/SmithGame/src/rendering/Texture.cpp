@@ -7,6 +7,8 @@ Texture::Texture(const std::string& filepath) : m_filepath(filepath), m_texture(
 
 }
 
+Texture::Texture() : m_filepath("") {}
+
 Texture::~Texture() {
     UnloadTexture();
 }
@@ -15,7 +17,8 @@ void Texture::LoadTexture() {
     if(m_texture)
         return;
 
-    LoadFromImage(m_filepath, &m_texture);
+    if(m_filepath.size()>0)
+        LoadFromImage(m_filepath, &m_texture);
 }
 
 void Texture::UnloadTexture() {
@@ -36,8 +39,8 @@ void LoadFromImage(const std::string& filepath, GLuint* address) {
     unsigned int width  = image.getSize().x;
     unsigned int height = image.getSize().y;
 
-    glGenTextures(1, &m_texture);
-    glBindTexture(GL_TEXTURE_2D, m_texture);
+    glGenTextures(1, address);
+    glBindTexture(GL_TEXTURE_2D, *address);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
