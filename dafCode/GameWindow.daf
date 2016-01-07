@@ -1,0 +1,33 @@
+#include "Game.daf"
+#include "WindowLib.daf"
+
+pub class GameWindow {
+	m_game:&mut Game;
+	m_title:&String;
+	m_width:uint32;
+	m_height:uint32;
+	pub GameWindow(game:&mut Game, title:&String, width:uint32, height:uint32) {
+		m_game   = game;
+		m_title  = title;
+		m_width  = width;
+		m_height = height;
+	}
+	
+	pub method Run() {
+		let mut windowHandle:=windowOpen(m_title, m_width, m_height);
+		m_game->Init();
+		m_game->OnResize(m_width, m_height);
+		while(!windowShouldClose(windowHandle)) {
+			
+		}
+	}
+	
+	 
+}
+
+let mut counter:=0;
+
+pub def outsideFunction:=() -> uint32 {
+	counter++;
+	return counter;
+}
