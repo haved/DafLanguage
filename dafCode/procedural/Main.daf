@@ -1,0 +1,7 @@
+#include "iostream"
+
+pub class Main {
+	pub func Main(String[] args) {
+		printf("Hello World!");
+	}
+}
