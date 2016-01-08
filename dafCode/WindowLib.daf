@@ -1,0 +1,25 @@
+namespace WindowLib {
+	pub class WindowHandle {
+		m_handle:unit64;
+		pub WindowHandle(handle:uint64){
+			m_handle = handle;
+		}
+	}
+	pub def openWindow:=(title:&char, width:uint32, height:uint32, samples:uint32) -> &WindowHandle {
+		return new WindowHandle(openWindowExtern(title, width, height, samples));
+	};
+	pub def setResizeCallback:=(handle:&WindowHandle, callback:(width:uint32, height:uint32)) {
+		//I dunno. Something something glfw
+	};
+	pub def shouldWindowClose:=(handle:&WindowHandle) -> boolean {
+		return false;
+	};
+	pub def swapWindow:=(hanlde:&WindowHandle) {
+		
+	};
+	pub def closeWindow:=(hanlde:&WindowHandle) {
+		delete handle;
+		//This file is not supposed to be good
+	};
+	extern def openWindowExtern:(title:&char, width:uint32, height:uint32)->uint64;
+}

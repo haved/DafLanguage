@@ -14,15 +14,17 @@ pub class GameWindow {
 	}
 	
 	pub method Run() {
-		let mut windowHandle:=windowOpen(m_title, m_width, m_height);
+		let mut windowHandle:&WindowLib::WindowHandle=WindowLib::openWindow(m_title, m_width, m_height, 8);
 		m_game->Init();
 		m_game->OnResize(m_width, m_height);
-		while(!windowShouldClose(windowHandle)) {
-			
+		WindowLib::setResizeCallback(windowHandle, (width:uint32, height:uint32){m_game});
+		while(!WindowLib::shouldClose(windowHandle)) {
+			m_game->OnNextFrame();
+			WindowLib::swapWindow(windowHandle);
 		}
+		m_game->Destroy();
+		WindowLib::closeWindow(windowHandle);
 	}
-	
-	 
 }
 
 let mut counter:=0;
