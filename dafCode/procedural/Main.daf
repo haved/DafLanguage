@@ -1,7 +1,50 @@
 #include "iostream"
 
-pub class Main {
+pub static class MyMainClass {
 	pub func Main(String[] args) {
 		printf("Hello World!");
 	}
+
+	
+	pub func StaticFunction() -> uint32 {
+		
+	}
+}
+
+pub class MyClass {
+	ball:uint32;
+	bolle:Bolle;	
+
+	pub MyClass() {
+		ball = 0;
+		bolle(1,1,1,1); //Maybe not so nice?
+		//bolle = Bolle(1,1,1,1); //The same!
+	}
+
+	pub MyClass(i:uint32) : ball(i), bolle() {}
+
+	pub MyClass(i:uint32, j:uint32) : ball(i), bolle(Bolle(Bolle(Bolle(Bolle(Bolle(Bolle(i,i,j,j)))))))
+
+pub class Bolle {
+	radius:float;
+	height:float;
+	volume:float;
+	weight:float;
+	pub Bolle() : radius(0), height(0), volume(0), weight(0) {
+	}
+
+	pub Bolle(&bolle:Bolle) : radius(bolle.radius), height(bolle.height) {
+		volume = bolle.volume;
+		this->weight=bolle.weight;
+	}
+}
+
+pub func GlobalFunction() {
+
+}
+
+let mut ball:=2;
+
+func ThisFileOnly() {
+	
 }
