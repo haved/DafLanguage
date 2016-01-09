@@ -1,20 +1,34 @@
 #include "iostream"
 
 pub static class MyMainClass {
-	pub func Main(String[] args) {
-		printf("Hello World!");
-	}
+	//Static classes can't have methods because you can't store it in memory	
+	pub static count:uint32=0; //Static fields have 0 cost init.
 
+	pub func Main(arsg:String[]) {
+		printf("Hello World!");
+		printf("StaticFunction() returned %d", StaticFunction());
+		//A func is a static method, meaning it doesn't take a "this".
+		//They can be declared outside of classes
+		let mut bolle:Bolle(20, 14);
+		let mut instance:MyClass();
+		let mut secondIntance:MyClass(4);
+		instance:MyClass(10, 4); //Um... Is this good?
+		bolle.radius=4;
+		secondInstance.GetMutBollePointer()[0]:Bolle(); //Is this?
+	}
 	
 	pub func StaticFunction() -> uint32 {
-		
+		return 4;	//chosen by fair dice roll.
+			  	//guaranteed to be random.
+				//Relevant xkcd: 221
 	}
 }
 
 pub class MyClass {
 	ball:uint32;
 	bolle:Bolle;	
-
+	changed:boolean;
+	
 	pub MyClass() {
 		ball = 0;
 		bolle(1,1,1,1); //Maybe not so nice?
@@ -23,13 +37,19 @@ pub class MyClass {
 
 	pub MyClass(i:uint32) : ball(i), bolle() {}
 
-	pub MyClass(i:uint32, j:uint32) : ball(i), bolle(Bolle(Bolle(Bolle(Bolle(Bolle(Bolle(i,i,j,j)))))))
+	pub MyClass(i:uint32, j:uint32) : ball(i), bolle(Bolle(Bolle(Bolle(Bolle(Bolle(Bolle(i,i,j,j))))))) {}
+
+	pub method GetMutBollePointer()->&mut Bolle {
+		changed=true;
+		return &mut bolle;
+	}
+}
 
 pub class Bolle {
-	radius:float;
-	height:float;
-	volume:float;
-	weight:float;
+	pub radius:float;
+	pub height:float;
+	pub volume:float;
+	pub weight:float;
 	pub Bolle() : radius(0), height(0), volume(0), weight(0) {
 	}
 
@@ -37,14 +57,24 @@ pub class Bolle {
 		volume = bolle.volume;
 		this->weight=bolle.weight;
 	}
+
+	pub Bolle(radius:uint32, h:uint32) {
+		this->radius=radius;
+		height=h;
+		weight=volume=radius*radius*3.14*height*3/4;
+	}
 }
 
 pub func GlobalFunction() {
-
+	printf("GlobalFunc() can be called from anywhere importing this file");
+	ball++;
+	printf("ball is now %d", ball);
 }
 
 let mut ball:=2;
 
 func ThisFileOnly() {
-	
+	printf("Only in this file can this func be called");	
+	ball++;
+	printf("Ball is now %d", ball);
 }
