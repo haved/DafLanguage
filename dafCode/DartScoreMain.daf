@@ -1,0 +1,3 @@
+pub func Main(args:string[]) {
+	let mut dartGame:DartGame(501, 3);
+}

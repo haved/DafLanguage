@@ -1,6 +1,0 @@
-pub abstract class Game {
-	pub abstract method Init();
-	pub abstract method OnResize(width:uint32, height:uint32);
-	pub abstract method OnNextFrame();
-	pub abstract method Destroy();
-}
