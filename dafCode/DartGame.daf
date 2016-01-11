@@ -24,13 +24,41 @@ pub class DartGame {
 		m_participants.push_back(DartParticipant(0, 0, player));
 	}
 
-	pub method StartRound() {
-		m_currentPlayer = 0;
-		m_roundWinner=-1;
+	pub method AddPlayer(players:DartPlayer[mut], count:uint32) {
+		for(let mut i:uint32=0; i < count; i++) {
+			m_participants.push_back(DartParticipant(0, 0, &players[i]));
+		}
+	}
+	
+	pub method StartHit() {
 		m_hitWinner=-1;
 		for(let i:uint32=0; i < m_participants.size(); i++) {
 			m_participants[i].PointsLeft = m_startScore;
 		}
+	}
+
+	pub method HitInProgress() -> bool {
+		return m_hitWinner == -1;
+	}
+
+	pub method PrintHitWinner() {
+		printf("Player %d, %s, won the hit!", m_hitWinner+1, m_participants[m_hitWinner].PlayerOfDart->Name);
+	}	
+
+	pub method StartRound() {
+		m_currentPlayer = 0;
+		m_roundWinner=-1;
+		for(let i:uint32=0; i < m_participants.size(); i++) {
+			m_participants[i].PointsLeft = m_startScore;
+		}
+	}
+	
+	pub method RoundInProgress() -> bool {
+		return m_roundWinner == -1;
+	}
+
+	pub method PrintRoundWinner() {
+		printf("Player %d, %s, won the round! Round win: %d/%d", m_roundWinner+1, m_participants[m_roundWinner].PlayerOfDart->Name, m_participants[m_roundWinner].RoundsWon, m_rounds);
 	}
 
 	pub method PrintGameStatus() {
@@ -47,7 +75,7 @@ pub class DartGame {
 	}
 
 	pub method PromptForInput() {
-		let roundPoints : uint32 = 0;
+		let mut roundPoints : uint32 = 0;
 		let pointsLeft = m_participants[m_currentPlayer].PointsLeft;
 		for(let i:uint32=0; i < 3; i++) {
 			while(true) {
@@ -64,6 +92,7 @@ pub class DartGame {
 					roundPoints+=50;
 					if(roundPoints==pointsLeft) {
 						PlayerWonRound(m_currentPlayer);
+						return;
 					}
 				else if(leter=='r')
 					roundPoints+=25;
@@ -75,6 +104,7 @@ pub class DartGame {
 					roundPoints+=InputNumber()*2:
 					if(roundPoints==pointsLeft) {
 						PlayerWonRound(m_currentPlayer);
+						return;
 					}
 				}
 				else if(letter=='t') {
@@ -95,8 +125,16 @@ pub class DartGame {
 		}
 	}
 
-	pub method RoundGoingOn() -> bool {
-		return roundWinner == -1;
+	pub method UpdateRatings() {
+		for(let mut i:uint32=0; i < m_participants.size(); i++) {
+			def iP:=m_participants[i];
+			for(let mut j:uint32=0; j < m_paricipants.size(); i++) {
+				if(i==j)
+					continue;
+				def jP:=m_participants[j];
+				iP.PlayerOfDart->UpdateRating(iP.RoundsWon>jP.RoundsWon,iP.RoundsWon<jP.RoundsWon,jP.PlayerOfDart->GetRating());
+			}
+		}
 	}
 }
 

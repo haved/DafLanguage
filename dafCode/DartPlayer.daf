@@ -12,4 +12,13 @@ pub class DartPlayer extends Player {
 	pub inline const method GetRating() -> uint32 { //Const meaning you don't need a &mut
 		return m_rating;
 	}
+
+	pub method UpdateRating(won:bool, lost:bool, otherRating:uint32) {
+		if(won  & m_rating < otherRating+100) {
+			m_rating += ((otherRating+100)-m_rating)/10;
+		}
+		if(lost & m_rating > otherRating-100) {
+			m_rating -= (m_rating-(otherRating-100))/10;
+		}
+	}
 }
