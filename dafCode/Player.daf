@@ -12,7 +12,7 @@ pub class Player {
 }
 
 pub func PrintPlayers(players:Player[], length:usize) {
-	for(int i = 0; i < length; i++) {
+	for(let mut i:usize = 0; i < length; i++) {
 		printf("Player %d: ", i+1);
 		players[i].PrintData();
 	}
