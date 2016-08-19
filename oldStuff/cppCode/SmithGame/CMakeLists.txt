@@ -49,4 +49,4 @@ target_link_libraries(SmithGame "SDL2")
 target_link_libraries(SmithGame "GLEW")
 target_link_libraries(SmithGame "sfml-system")
 target_link_libraries(SmithGame "sfml-graphics")
-
+target_link_libraries(SmithGame "GL")
